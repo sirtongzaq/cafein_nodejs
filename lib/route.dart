@@ -1,4 +1,4 @@
-import 'package:cafein_nodejs/features/auth/screens/auth_screen.dart';
+import 'package:cafein_nodejs/features/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {

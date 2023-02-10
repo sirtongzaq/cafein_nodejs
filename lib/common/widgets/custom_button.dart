@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
-  final bool isLoading;
-  const CustomButton(
-      {super.key,
-      required this.text,
-      required this.onTap,
-      required this.isLoading,});
+  const CustomButton({
+    super.key,
+    required this.text,
+    required this.onTap,
+  });
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,31 +39,23 @@ class CustomButton extends StatelessWidget {
           color: GlobalVariable.secondaryColor,
           child: InkWell(
             borderRadius: BorderRadius.circular(10.0),
-            onTap: () {
-              onTap;
-            },
+            onTap: onTap,
             splashColor: Colors.white,
             splashFactory: InkSplash.splashFactory,
-            child: isLoading
-                ? Center(
-                    child: CircularProgressIndicator(
+            child: Container(
+              padding: EdgeInsets.all(15.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    text.toUpperCase(),
+                    style: TextStyle(
                       color: Colors.white,
-                    ),
-                  )
-                : Container(
-                    padding: EdgeInsets.all(15.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          text.toUpperCase(),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

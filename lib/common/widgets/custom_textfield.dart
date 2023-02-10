@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       obscureText: obscureText,
       style: const TextStyle(
@@ -46,6 +46,12 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         prefixIconColor: Colors.white,
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your ${hintText}';
+        }
+        return null;
+      },
     );
   }
 }
