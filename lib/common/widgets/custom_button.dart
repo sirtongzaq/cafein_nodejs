@@ -19,15 +19,15 @@ class CustomButton extends StatelessWidget {
       // login btn
       child: Container(
         width: 300,
-        height: 48,
+        height: 55,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: GlobalVariable.secondaryColor,
+                color: GlobalVariable.containerColor,
                 offset: Offset(0, 1),
                 blurRadius: 10.0),
             BoxShadow(
-                color: GlobalVariable.secondaryColor,
+                color: GlobalVariable.containerColor,
                 offset: Offset(1, 0),
                 blurRadius: 10.0)
           ],
@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
             splashColor: Colors.white,
             splashFactory: InkSplash.splashFactory,
             child: Container(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(19.0),
               child: Column(
                 children: <Widget>[
                   Text(

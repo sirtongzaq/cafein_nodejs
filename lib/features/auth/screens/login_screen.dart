@@ -1,24 +1,20 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:cafein_nodejs/common/widgets/custom_button.dart';
 import 'package:cafein_nodejs/common/widgets/custom_textfield.dart';
 import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:cafein_nodejs/features/auth/screens/signup_screen.dart';
+import 'package:cafein_nodejs/features/auth/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-class AuthScreen extends StatefulWidget {
-  static const String routeName = '/auth_screen';
-  const AuthScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class _LoginScreenState extends State<LoginScreen> {
+  final AuthService authService = AuthService();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -29,23 +25,11 @@ class _AuthScreenState extends State<AuthScreen> {
     super.dispose();
   }
 
-  void sendPostRequest() async {
-    final uri = "http://192.168.1.54:3000";
-    final path = "/api/signup";
-    final url = Uri.parse(uri+path);
-    final response = await http.post(
-      url,
-      body: jsonEncode({
-        'username': 'example',
-        'email': 'example@kindacode.com',
-        'password': '123456'
-      }),
-      headers: {
-        HttpHeaders.contentTypeHeader: 'application/json',
-      },
-    );
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+  void signInUser() {
+    authService.signInUser(
+        context: context,
+        email: _emailController.text,
+        password: _passwordController.text);
   }
 
   @override
@@ -94,10 +78,9 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             SizedBox(height: 50),
             CustomButton(
-              text: "LOGIN",
+              text: "Login",
               onTap: () {
-                print("testAPI");
-                sendPostRequest();
+                signInUser();
               },
             ),
             SizedBox(

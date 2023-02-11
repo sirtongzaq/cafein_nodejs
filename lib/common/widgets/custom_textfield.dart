@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return TextField(
       controller: controller,
       obscureText: obscureText,
       style: const TextStyle(
@@ -28,14 +28,14 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
-            color: Colors.white,
+            color: Colors.transparent,
             width: 2,
           ),
         ),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
-              color: GlobalVariable.secondaryColor,
+              color: Colors.transparent,
               width: 2,
             )),
         hintText: hintText,
@@ -43,15 +43,11 @@ class CustomTextField extends StatelessWidget {
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
+        filled: true,
+        fillColor: GlobalVariable.containerColor,
         prefixIcon: prefixIcon,
         prefixIconColor: Colors.white,
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter your ${hintText}';
-        }
-        return null;
-      },
     );
   }
 }
