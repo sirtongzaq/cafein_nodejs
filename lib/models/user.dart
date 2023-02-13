@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:ffi';
 
@@ -9,6 +10,7 @@ class User {
   final String gender;
   final String type;
   final String token;
+  final String uid;
   User({
     required this.username,
     required this.email,
@@ -17,6 +19,7 @@ class User {
     required this.gender,
     required this.type,
     required this.token,
+    required this.uid,
   });
 
   
@@ -30,6 +33,7 @@ class User {
       'gender': gender,
       'type': type,
       'token': token,
+      'uid': uid,
     };
   }
 
@@ -42,6 +46,7 @@ class User {
       gender: map['gender'] as String,
       type: map['type'] as String,
       token: map['token'] as String,
+      uid: map['uid'] as String,
     );
   }
 

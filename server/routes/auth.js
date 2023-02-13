@@ -1,9 +1,57 @@
 const express = require("express");
 const User = require("../models/user");
+const Store = require("../models/store");
 const bcryptjs = require("bcryptjs");
 const authRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+const crypto = require("crypto");
+// POST DATA STORE
+authRouter.get("/api/postStore", async (req, res) => {
+  try {
+    const data = await Store.find().exec();
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+authRouter.post("/api/postStore", async (req, res) => {
+  try {
+    const {
+      string_name,
+      rating,
+      count_rating,
+      price,
+      open_dialy,
+      address,
+      contact,
+      facebook,
+      type,
+    } = req.body;
+    const existringStore = await Store.findOne({ string_name });
+    if (existringStore) {
+      return res
+        .status(400)
+        .json({ msg: "Store with same name already exists!" });
+    }
+    let store = new Store({
+      string_name,
+      rating,
+      count_rating,
+      price,
+      open_dialy,
+      address,
+      contact,
+      facebook,
+      type,
+    });
+    store = await store.save();
+    res.json(store);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // SIGNUP
 authRouter.post("/api/signup", async (req, res) => {
   try {
@@ -15,12 +63,14 @@ authRouter.post("/api/signup", async (req, res) => {
         .json({ msg: "User with same email already exists!" });
     }
     const hashedPassword = await bcryptjs.hash(password, 8);
+    const uID = await crypto.randomUUID();
     let user = new User({
       username,
       email,
       password: hashedPassword,
       age,
       gender,
+      uid: uID,
     });
     user = await user.save();
     res.json(user);
@@ -28,7 +78,7 @@ authRouter.post("/api/signup", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
-
+// SIGNIN
 authRouter.post("/api/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -48,7 +98,7 @@ authRouter.post("/api/signin", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
-
+//TOKEN VALID
 authRouter.post("/tokenIsValid", async (req, res) => {
   try {
     const token = req.header("x-auth-token");
@@ -63,11 +113,12 @@ authRouter.post("/tokenIsValid", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
-
-// get user data
+//GET USER DATA
 authRouter.get("/", auth, async (req, res) => {
   const user = await User.findById(req.user);
   res.json({ ...user._doc, token: req.token });
 });
+
+authRouter.get("/stores", async (req, res) => {});
 
 module.exports = authRouter;

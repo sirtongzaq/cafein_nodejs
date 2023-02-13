@@ -11,6 +11,7 @@ class UserProvider extends ChangeNotifier {
     age: 0,
     gender: "",
     type: "",
+    uid: "",
   );
 
   User get user => _user;

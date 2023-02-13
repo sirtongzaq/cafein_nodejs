@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
             splashColor: Colors.white,
             splashFactory: InkSplash.splashFactory,
             child: Container(
-              padding: EdgeInsets.all(19.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
                   Text(

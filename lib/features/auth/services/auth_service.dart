@@ -31,6 +31,7 @@ class AuthService {
         gender: gender,
         type: "",
         token: "",
+        uid: "",
       );
       final url = Uri.parse('${GlobalVariable.url}/api/signup');
       http.Response res = await http.post(
@@ -118,7 +119,7 @@ class AuthService {
         userProvider.setUser(res.body);
         await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
         navigator.pushAndRemoveUntil(
-          MaterialPageRoute(
+          CupertinoPageRoute(
             builder: (context) => const HomeScreen(),
           ),
           (route) => false,

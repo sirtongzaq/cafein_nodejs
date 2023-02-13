@@ -2,11 +2,12 @@
 
 import 'dart:io';
 import 'package:cafein_nodejs/constants/global_variables.dart';
+import 'package:cafein_nodejs/features/auth/providers/api_provider.dart';
+import 'package:cafein_nodejs/features/auth/providers/mongodb_provider.dart';
 import 'package:cafein_nodejs/features/auth/screens/home_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/login_screen.dart';
 import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
 import 'package:cafein_nodejs/features/auth/services/auth_service.dart';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ApiProvider()),
+        ChangeNotifierProvider(create: (_) => MongodbProvider()),
       ],
       child: const MyApp(),
     ),
@@ -44,11 +47,11 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'CAFEIN',
         theme: ThemeData(
+          textTheme: GoogleFonts.mitrTextTheme(),
           scaffoldBackgroundColor: GlobalVariable.backgroundColor,
           colorScheme: ColorScheme.light(
             primary: GlobalVariable.secondaryColor,
           ),
-          textTheme: GoogleFonts.interTextTheme(),
           appBarTheme: const AppBarTheme(
             elevation: 0,
             iconTheme: IconThemeData(
