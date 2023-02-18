@@ -1,8 +1,15 @@
 import 'dart:async';
 
+import 'package:cafein_nodejs/common/widgets/category.dart';
+import 'package:cafein_nodejs/common/widgets/category_header.dart';
 import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:cafein_nodejs/features/auth/providers/api_provider.dart';
 import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
+import 'package:cafein_nodejs/features/auth/screens/category/bakery.dart';
+import 'package:cafein_nodejs/features/auth/screens/category/coffee.dart';
+import 'package:cafein_nodejs/features/auth/screens/category/hybridbar.dart';
+import 'package:cafein_nodejs/features/auth/screens/category/slowbar.dart';
+import 'package:cafein_nodejs/features/auth/screens/category/speedbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/profile_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/search_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/test_api.dart';
@@ -713,7 +720,91 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
-                  
+                  SizedBox(height: 10),
+                  CustomHeader(text: "CATEGORY"),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      children: [
+                        CustomCategory(
+                          name: "SLOWBAR",
+                          onTap: (() {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const SlowbarScreen()),
+                            );
+                          }),
+                          imgPath: "assets/slowbar.png",
+                        ),
+                        CustomCategory(
+                          name: "SPEEDBAR",
+                          onTap: (() {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const SpeedbarScreen()),
+                            );
+                          }),
+                          imgPath: "assets/speedbar.png",
+                        ),
+                        CustomCategory(
+                          name: "HYBRIDBAR",
+                          onTap: (() {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const HybridbarScreen()),
+                            );
+                          }),
+                          imgPath: "assets/hybridbar.png",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      children: [
+                        CustomCategory(
+                          name: "COFFEE",
+                          onTap: (() {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const CoffeeScreen()),
+                            );
+                          }),
+                          imgPath: "assets/coffee.png",
+                        ),
+                        CustomCategory(
+                          name: "BAKERY",
+                          onTap: (() {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const BakeryScreen()),
+                            );
+                          }),
+                          imgPath: "assets/bakery.png",
+                        ),
+                        CustomCategory(
+                          name: "COMMUNITY",
+                          onTap: (() {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const HomeScreen()),
+                            );
+                          }),
+                          imgPath: "assets/community.png",
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  CustomHeader(text: "LATEST REVIEW"),
                 ],
               ),
             ),

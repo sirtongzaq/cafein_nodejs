@@ -9,17 +9,18 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class CoffeeScreen extends StatefulWidget {
+  const CoffeeScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<CoffeeScreen> createState() => _CoffeeScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  List<dynamic> _foundData = [];
+class _CoffeeScreenState extends State<CoffeeScreen> {
   List<dynamic> _dataStore = [];
   List<dynamic> get dataStore => _dataStore;
+  List<dynamic> result = [];
+  List<dynamic> _foundData= [];
   Future<void> fetchDataStore() async {
     try {
       final url = Uri.parse('${GlobalVariable.url}/api/postStore');
@@ -33,29 +34,16 @@ class _SearchScreenState extends State<SearchScreen> {
         print(res.statusCode);
         final jsonData = jsonDecode(res.body);
         _dataStore = jsonData;
+        result = dataStore;
+        setState(() {
+          _foundData = result;
+        });
       } else {
         print("Conection fail");
       }
     } catch (e) {
       print(e.toString());
     }
-  }
-
-  void Search(String value) {
-    List<dynamic> result = [];
-    if (value.isEmpty) {
-      result = dataStore;
-    } else {
-      result = dataStore
-          .where((user) => user["string_name"]
-              .toString()
-              .toLowerCase()
-              .contains(value.toLowerCase()))
-          .toList();
-    }
-    setState(() {
-      _foundData = result;
-    });
   }
 
   @override
@@ -70,37 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        title: TextField(
-          onChanged: (value) => Search(value),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(
-                color: Colors.transparent,
-                width: 2,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 2,
-                )),
-            hintText: "Search",
-            hintStyle: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-            filled: true,
-            fillColor: GlobalVariable.containerColor,
-            prefixIcon: Icon(Icons.search,color: Colors.white,),
-            prefixIconColor: Colors.white,
-          ),
-        ),
+        title: Text("COFFEE"),
         backgroundColor: GlobalVariable.backgroundColor,
       ),
       body: SizedBox(
