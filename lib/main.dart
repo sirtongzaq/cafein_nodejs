@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'CAFEIN',
         theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: GoogleFonts.mitrTextTheme(),
           scaffoldBackgroundColor: GlobalVariable.backgroundColor,
           colorScheme: ColorScheme.light(

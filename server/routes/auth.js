@@ -6,7 +6,7 @@ const authRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const crypto = require("crypto");
-// POST DATA STORE
+
 authRouter.get("/api/postStore", async (req, res) => {
   try {
     const data = await Store.find().exec();
@@ -15,6 +15,45 @@ authRouter.get("/api/postStore", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+authRouter.put("/api/likeStore", async (req, res) => {
+  try {
+    const { string_name, uid } = req.body;
+    const store = await Store.findOne({ string_name: string_name });
+    if (!store) {
+      return res.status(404).json({ error: "Store not found" });
+    }
+    const existingUser = store.likes.find((like) => like === uid);
+    if (existingUser) {
+      store.likes.pull(uid);
+      const updatedStore = await store.save();
+      return res.status(200).json(updatedStore);
+    }
+    store.likes.push(uid);
+    const updatedStore = await store.save();
+    res.status(200).json(updatedStore);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+authRouter.put("/api/unlikeStore", async (req, res) => {
+  try {
+    const { string_name, uid } = req.body;
+    const updatedStore = await Store.findOneAndUpdate(
+      { string_name: string_name },
+      { $push: { likes: uid } },
+      { new: true }
+    );
+    if (!updatedStore) {
+      return res.status(404).json({ error: "Store not found" });
+    }
+    res.status(200).json(updatedStore);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 authRouter.post("/api/postStore", async (req, res) => {
   try {
     const {

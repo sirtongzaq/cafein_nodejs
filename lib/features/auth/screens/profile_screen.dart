@@ -25,6 +25,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            CircleAvatar(
+              radius: 100,
+              backgroundColor: GlobalVariable.containerColor,
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Card(
               color: GlobalVariable.thirdColor,
               child: ListTile(
@@ -32,7 +39,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Icons.person,
                   color: Colors.white,
                 ),
-                title: Text(user.username.toUpperCase(),style: TextStyle(color: Colors.white),),
+                title: Text(
+                  user.username.toUpperCase(),
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
             Card(
@@ -42,7 +52,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Icons.email,
                   color: Colors.white,
                 ),
-                title: Text(user.email.toUpperCase(),style: TextStyle(color: Colors.white),),
+                title: Text(
+                  user.email.toUpperCase(),
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
             Card(
@@ -52,7 +65,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Icons.numbers,
                   color: Colors.white,
                 ),
-                title: Text(user.age.toString(),style: TextStyle(color: Colors.white),),
+                title: Text(
+                  user.age.toString(),
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
             Card(
@@ -62,7 +78,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Icons.male,
                   color: Colors.white,
                 ),
-                title: Text(user.gender.toUpperCase(),style: TextStyle(color: Colors.white),),
+                title: Text(
+                  user.gender.toUpperCase(),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            Card(
+              color: GlobalVariable.thirdColor,
+              child: ListTile(
+                leading: Icon(
+                  Icons.coffee,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  user.uid.toUpperCase(),
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

@@ -46,5 +46,5 @@ const storeSchema = mongoose.Schema({
   },
 });
 
-const User = mongoose.model("Store", storeSchema);
-module.exports = User;
+const Store = mongoose.model("Store", storeSchema);
+module.exports = Store;

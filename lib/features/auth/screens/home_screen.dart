@@ -4,6 +4,7 @@ import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:cafein_nodejs/features/auth/providers/api_provider.dart';
 import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
 import 'package:cafein_nodejs/features/auth/screens/profile_screen.dart';
+import 'package:cafein_nodejs/features/auth/screens/search_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/test_api.dart';
 import 'package:cafein_nodejs/features/auth/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       children: [
                         CircleAvatar(
                           radius: 52,
-                          backgroundColor: GlobalVariable.secondaryColor,
+                          backgroundColor: GlobalVariable.containerColor,
                         ),
                         Text(
                           user.username.toUpperCase(),
@@ -153,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (context) => const HomeScreen()),
+                              builder: (context) => const SearchScreen()),
                         );
                       },
                     ),
@@ -712,6 +713,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
+                  
                 ],
               ),
             ),
