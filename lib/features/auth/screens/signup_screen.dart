@@ -99,7 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
           password: _passwordController.text,
           age: _ageController.text,
           gender: defualtGender,
-          image: resimg.secureUrl,
+          img: resimg.secureUrl,
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
