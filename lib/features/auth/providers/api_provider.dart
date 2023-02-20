@@ -3,7 +3,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 String X = "3ee8-2001-fb1-148-7898-84d7-14ac-a931-997a.ap.ngrok.io";
 
 class ApiProvider with ChangeNotifier {

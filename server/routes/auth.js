@@ -37,23 +37,6 @@ authRouter.put("/api/likeStore", async (req, res) => {
   }
 });
 
-authRouter.put("/api/unlikeStore", async (req, res) => {
-  try {
-    const { string_name, uid } = req.body;
-    const updatedStore = await Store.findOneAndUpdate(
-      { string_name: string_name },
-      { $push: { likes: uid } },
-      { new: true }
-    );
-    if (!updatedStore) {
-      return res.status(404).json({ error: "Store not found" });
-    }
-    res.status(200).json(updatedStore);
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-});
-
 authRouter.post("/api/postStore", async (req, res) => {
   try {
     const {
@@ -94,7 +77,7 @@ authRouter.post("/api/postStore", async (req, res) => {
 // SIGNUP
 authRouter.post("/api/signup", async (req, res) => {
   try {
-    const { username, email, password, age, gender } = req.body;
+    const { username, email, password, age, gender, image } = req.body;
     const existringUser = await User.findOne({ email });
     if (existringUser) {
       return res
@@ -110,6 +93,7 @@ authRouter.post("/api/signup", async (req, res) => {
       age,
       gender,
       uid: uID,
+      image,
     });
     user = await user.save();
     res.json(user);
@@ -158,6 +142,5 @@ authRouter.get("/", auth, async (req, res) => {
   res.json({ ...user._doc, token: req.token });
 });
 
-authRouter.get("/stores", async (req, res) => {});
 
 module.exports = authRouter;

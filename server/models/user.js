@@ -22,11 +22,11 @@ const userSchema = mongoose.Schema({
     require: true,
     type: String,
   },
-  age:{
+  age: {
     require: true,
     type: Number,
   },
-  gender:{
+  gender: {
     require: true,
     type: String,
   },
@@ -35,8 +35,12 @@ const userSchema = mongoose.Schema({
     default: "user",
   },
   uid: {
-    type: String
-  }
+    type: String,
+  },
+  image: {
+    require: true,
+    type: String,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

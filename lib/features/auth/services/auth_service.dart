@@ -7,6 +7,7 @@ import 'package:cafein_nodejs/features/auth/screens/home_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/login_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/signup_screen.dart';
 import 'package:cafein_nodejs/models/user.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -14,14 +15,14 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  void signupUser({
-    required BuildContext context,
-    required String username,
-    required String email,
-    required String password,
-    required String age,
-    required String gender,
-  }) async {
+  void signupUser(
+      {required BuildContext context,
+      required String username,
+      required String email,
+      required String password,
+      required String age,
+      required String gender,
+      required String image}) async {
     try {
       User user = User(
         username: username,
@@ -32,6 +33,7 @@ class AuthService {
         type: "",
         token: "",
         uid: "",
+        image: image,
       );
       final url = Uri.parse('${GlobalVariable.url}/api/signup');
       http.Response res = await http.post(

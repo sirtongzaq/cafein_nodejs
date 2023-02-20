@@ -29,29 +29,30 @@ class MongodbProvider with ChangeNotifier {
   }
 
   Stream<List<dynamic>> fetchDataStoreRealtime(Duration refreshRate) async* {
-  while (true) {
-    try {
-      final url = Uri.parse('${GlobalVariable.url}/api/postStore');
-      http.Response res = await http.get(
-        url,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
-        },
-      );
-      if (res.statusCode == 200) {
-        final jsonData = jsonDecode(res.body);
-        _dataStore = jsonData;
-        yield _dataStore;
-      } else {
-        throw Exception("Connection failed with status code: ${res.statusCode}");
+    while (true) {
+      try {
+        final url = Uri.parse('${GlobalVariable.url}/api/postStore');
+        http.Response res = await http.get(
+          url,
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          },
+        );
+        if (res.statusCode == 200) {
+          final jsonData = jsonDecode(res.body);
+          _dataStore = jsonData;
+          yield _dataStore;
+        } else {
+          throw Exception(
+              "Connection failed with status code: ${res.statusCode}");
+        }
+      } catch (e) {
+        print(e.toString());
+        yield [];
       }
-    } catch (e) {
-      print(e.toString());
-      yield [];
+      await Future.delayed(refreshRate);
     }
-    await Future.delayed(refreshRate);
   }
-}
 
   Future<void> likeStore(Map<String, dynamic> body) async {
     try {

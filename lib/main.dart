@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'dart:io';
 import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:cafein_nodejs/features/auth/providers/api_provider.dart';
 import 'package:cafein_nodejs/features/auth/providers/mongodb_provider.dart';
