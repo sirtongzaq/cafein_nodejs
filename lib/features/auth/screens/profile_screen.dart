@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -29,8 +30,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
     });
   }
-  void saveImage() async {
-  }
+
+  void saveImage() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -46,36 +47,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            _image == null
-                ? CircleAvatar(
-                    radius: 100,
-                    backgroundColor: GlobalVariable.containerColor,
-                  )
-                : CircleAvatar(
-                    radius: 100,
-                    backgroundImage: Image.file(
-                      _image!,
-                      fit: BoxFit.cover,
-                    ).image,
-                    backgroundColor: GlobalVariable.containerColor,
-                  ),
-            Padding(
-              padding: const EdgeInsets.only(left: 150),
-              child: GestureDetector(
-                onTap: () {
-                  pickImage();
-                },
-                child: Icon(
-                  Icons.image,
-                  color: Colors.white,
-                ),
-              ),
+            CircleAvatar(
+              radius: 100,
+              backgroundImage: NetworkImage(user.image),
+              backgroundColor: GlobalVariable.containerColor,
             ),
             SizedBox(
               height: 10,
             ),
             Card(
-              color: GlobalVariable.thirdColor,
+              color: GlobalVariable.containerColor,
+              elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.person,
@@ -88,7 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Card(
-              color: GlobalVariable.thirdColor,
+              color: GlobalVariable.containerColor,
+              elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.email,
@@ -101,7 +84,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Card(
-              color: GlobalVariable.thirdColor,
+              color: GlobalVariable.containerColor,
+              elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.numbers,
@@ -114,7 +98,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Card(
-              color: GlobalVariable.thirdColor,
+              color: GlobalVariable.containerColor,
+              elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.male,
@@ -127,7 +112,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Card(
-              color: GlobalVariable.thirdColor,
+              color: GlobalVariable.containerColor,
+              elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.coffee,

@@ -44,11 +44,12 @@ authRouter.post("/api/postStore", async (req, res) => {
       rating,
       count_rating,
       price,
-      open_dialy,
+      open_daily,
       address,
       contact,
       facebook,
       type,
+      map,
     } = req.body;
     const existringStore = await Store.findOne({ string_name });
     if (existringStore) {
@@ -61,11 +62,12 @@ authRouter.post("/api/postStore", async (req, res) => {
       rating,
       count_rating,
       price,
-      open_dialy,
+      open_daily,
       address,
       contact,
       facebook,
       type,
+      map,
     });
     store = await store.save();
     res.json(store);
@@ -141,6 +143,5 @@ authRouter.get("/", auth, async (req, res) => {
   const user = await User.findById(req.user);
   res.json({ ...user._doc, token: req.token });
 });
-
 
 module.exports = authRouter;

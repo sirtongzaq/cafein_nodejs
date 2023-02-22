@@ -15,7 +15,6 @@ class TestAPI extends StatefulWidget {
 }
 
 class _TestAPIState extends State<TestAPI> {
-  
   @override
   Widget build(BuildContext context) {
     duration() async* {
@@ -24,6 +23,7 @@ class _TestAPIState extends State<TestAPI> {
         yield "";
       }
     }
+
     final user = Provider.of<UserProvider>(context).user;
     final apiProvider = Provider.of<MongodbProvider>(context, listen: false);
     return Scaffold(
@@ -174,10 +174,10 @@ class _TestAPIState extends State<TestAPI> {
                                               "string_name": name,
                                               "uid": user.uid
                                             });
-                                            setState(() {
-                                              apiProvider.fetchDataStore();
-                                            });
                                           },
+                                        ),
+                                        SizedBox(
+                                          height: 10,
                                         ),
                                         Text(
                                           count_like.toString(),

@@ -100,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       children: [
                         CircleAvatar(
                           radius: 52,
+                          backgroundImage: NetworkImage(user.image),
                           backgroundColor: GlobalVariable.containerColor,
                         ),
                         Text(

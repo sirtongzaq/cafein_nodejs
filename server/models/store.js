@@ -16,7 +16,7 @@ const storeSchema = mongoose.Schema({
     require: true,
     type: String,
   },
-  open_dialy: {
+  open_daily: {
     require: true,
     type: String,
   },
@@ -43,6 +43,10 @@ const storeSchema = mongoose.Schema({
   views: {
     type: Number,
     default: 0,
+  },
+  map: {
+    require: true,
+    type: Array,
   },
 });
 

@@ -92,7 +92,7 @@ class _SignupScreenState extends State<SignupScreen> {
         CloudinaryResponse resimg = await cloudinary.uploadFile(
             CloudinaryFile.fromFile(_image!.path, folder: "ImgProfile"));
         print(resimg.secureUrl);
-        authService.signupUser(
+        authService.signUpUser(
           context: context,
           username: _usernameController.text,
           email: _emailController.text,
