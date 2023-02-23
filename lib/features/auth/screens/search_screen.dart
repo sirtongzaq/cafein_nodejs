@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+
+import 'store/store_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -95,7 +98,10 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             filled: true,
             fillColor: GlobalVariable.containerColor,
-            prefixIcon: Icon(Icons.search,color: Colors.white,),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
             prefixIconColor: Colors.white,
           ),
         ),
@@ -123,8 +129,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           _foundData[index]["string_name"]
                               .toString()
                               .toUpperCase(),
-                          style:
-                              TextStyle(color: Color.fromRGBO(141, 158, 255, 1)),
+                          style: TextStyle(
+                              color: Color.fromRGBO(141, 158, 255, 1)),
                         ),
                         subtitle: Container(
                           child: Column(
@@ -144,7 +150,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                     GlobalVariable.ratingImg,
                                 itemCount: 5,
                                 itemSize: 20,
-                                itemPadding: EdgeInsets.symmetric(horizontal: 0),
+                                itemPadding:
+                                    EdgeInsets.symmetric(horizontal: 0),
                                 direction: Axis.horizontal,
                               ),
                             ],
@@ -157,7 +164,15 @@ class _SearchScreenState extends State<SearchScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => StoreScreen(
+                                  storename: _foundData[index]["string_name"]),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   );

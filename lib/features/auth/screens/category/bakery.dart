@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:cafein_nodejs/features/auth/providers/mongodb_provider.dart';
 import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
+import 'package:cafein_nodejs/features/auth/screens/store/store_screen.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -20,7 +22,7 @@ class _BakeryScreenState extends State<BakeryScreen> {
   List<dynamic> _dataStore = [];
   List<dynamic> get dataStore => _dataStore;
   List<dynamic> result = [];
-  List<dynamic> _foundData= [];
+  List<dynamic> _foundData = [];
   Future<void> fetchDataStore() async {
     try {
       final url = Uri.parse('${GlobalVariable.url}/api/postStore');
@@ -86,8 +88,8 @@ class _BakeryScreenState extends State<BakeryScreen> {
                           _foundData[index]["string_name"]
                               .toString()
                               .toUpperCase(),
-                          style:
-                              TextStyle(color: Color.fromRGBO(141, 158, 255, 1)),
+                          style: TextStyle(
+                              color: Color.fromRGBO(141, 158, 255, 1)),
                         ),
                         subtitle: Container(
                           child: Column(
@@ -107,7 +109,8 @@ class _BakeryScreenState extends State<BakeryScreen> {
                                     GlobalVariable.ratingImg,
                                 itemCount: 5,
                                 itemSize: 20,
-                                itemPadding: EdgeInsets.symmetric(horizontal: 0),
+                                itemPadding:
+                                    EdgeInsets.symmetric(horizontal: 0),
                                 direction: Axis.horizontal,
                               ),
                             ],
@@ -120,7 +123,15 @@ class _BakeryScreenState extends State<BakeryScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => StoreScreen(
+                                  storename: _foundData[index]["string_name"]),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   );

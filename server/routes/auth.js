@@ -6,6 +6,60 @@ const authRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const crypto = require("crypto");
+const Review = require("../models/review");
+
+authRouter.put("/api/likeReviewStore", async (req, res) => {
+  try {
+    const { review_id, uid } = req.body;
+    const review = await Review.findOne({ _id: review_id });
+    if (!review) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+    const existingUser = review.likes.find((like) => like === uid);
+    if (existingUser) {
+      review.likes.pull(uid);
+      const updatedReview = await review.save();
+      return res.status(200).json(updatedReview);
+    }
+    review.likes.push(uid);
+    const updatedReview = await review.save();
+    res.status(200).json(updatedReview);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+authRouter.get("/api/reviewStore", async (req, res) => {
+  try {
+    const data = await Review.find().exec();
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+authRouter.post("/api/reviewStore", async (req, res) => {
+  try {
+    const { uid, email, storename, message, rating, image, date } = req.body;
+    const store = await Store.findOne({ string_name: storename });
+    if (!store) {
+      return res.status(400).json({ msg: "Store not found" });
+    }
+    let review = new Review({
+      uid,
+      email,
+      storename,
+      message,
+      rating,
+      image,
+      date,
+    });
+    review = await review.save();
+    res.status(200).json(review);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 authRouter.get("/api/postStore", async (req, res) => {
   try {

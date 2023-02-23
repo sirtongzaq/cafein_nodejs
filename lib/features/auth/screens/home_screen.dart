@@ -4,6 +4,7 @@ import 'package:cafein_nodejs/common/widgets/category.dart';
 import 'package:cafein_nodejs/common/widgets/category_header.dart';
 import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:cafein_nodejs/features/auth/providers/api_provider.dart';
+import 'package:cafein_nodejs/features/auth/providers/mongodb_provider.dart';
 import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/bakery.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/coffee.dart';
@@ -12,11 +13,12 @@ import 'package:cafein_nodejs/features/auth/screens/category/slowbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/speedbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/profile_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/search_screen.dart';
-import 'package:cafein_nodejs/features/auth/screens/test_api.dart';
+import 'package:cafein_nodejs/features/auth/screens/favorite_screen.dart';
 import 'package:cafein_nodejs/features/auth/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +38,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late StreamSubscription<Position> streamSubscription;
   var latitude = '';
   var longitude = '';
+  var address = '';
+
+  Future<void> getAddressFromLatLang(Position position) async {
+    List<Placemark> placemark =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark place = placemark[0];
+    address =
+        'Address : ${place.street}, ${place.locality}, ${place.postalCode}, ${place.country}';
+  }
+
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -61,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         Geolocator.getPositionStream().listen((Position position) {
       latitude = 'Latitude : ${position.latitude}';
       longitude = 'Longitude : ${position.longitude}';
+      getAddressFromLatLang(position);
     });
     return await Geolocator.getCurrentPosition();
   }
@@ -73,8 +86,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    duration() async* {
+      while (true) {
+        await Future.delayed(Duration(milliseconds: 1000));
+        yield "";
+      }
+    }
+
     final user = Provider.of<UserProvider>(context).user;
     final apiProvider = Provider.of<ApiProvider>(context, listen: false);
+    final apiProviderDB = Provider.of<MongodbProvider>(context, listen: false);
     TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       backgroundColor: GlobalVariable.backgroundColor,
@@ -756,7 +777,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) => const HybridbarScreen()),
+                                  builder: (context) =>
+                                      const HybridbarScreen()),
                             );
                           }),
                           imgPath: "assets/hybridbar.png",
@@ -806,6 +828,182 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   SizedBox(height: 10),
                   CustomHeader(text: "LATEST REVIEW"),
+                  StreamBuilder<Object>(
+                      stream: duration(),
+                      builder: (context, snapshot) {
+                        return FutureBuilder(
+                            future: apiProviderDB.fetchDataReviewStore(),
+                            builder: (context, snapshot) {
+                              return Container(
+                                height: 500,
+                                child: ListView.builder(
+                                    physics: ClampingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        apiProviderDB.dataReivewStore.length,
+                                    itemBuilder: (context, index) {
+                                      var data =
+                                          apiProviderDB.dataReivewStore[index];
+                                      var storename = data["storename"];
+                                      var email = data["email"];
+                                      var message = data["message"];
+                                      var image = data["image"];
+                                      var date = data["date"];
+                                      var rt = data["rating"];
+                                      int count_like = data["likes"].length;
+                                      return Card(
+                                        // detail review
+                                        elevation: 0,
+                                        color: GlobalVariable.containerColor,
+                                        margin: EdgeInsets.all(15),
+
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image.network(image,
+                                                    fit: BoxFit.cover,
+                                                    width: 342,
+                                                    height: 230),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "STORE",
+                                                    style: TextStyle(
+                                                        color: GlobalVariable
+                                                            .secondaryColor),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    storename
+                                                        .toString()
+                                                        .toUpperCase(),
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "EMAIL",
+                                                    style: TextStyle(
+                                                        color: GlobalVariable
+                                                            .secondaryColor),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    email
+                                                        .toString()
+                                                        .toUpperCase(),
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                width: 340,
+                                                height: 130,
+                                                child: Text(
+                                                  message,
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "DATE",
+                                                    style: TextStyle(
+                                                        color: GlobalVariable
+                                                            .secondaryColor),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    date,
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "RATING",
+                                                    style: TextStyle(
+                                                        color: GlobalVariable
+                                                            .secondaryColor),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  RatingBarIndicator(
+                                                    rating: double.parse(rt),
+                                                    itemBuilder: (context,
+                                                            index) =>
+                                                        GlobalVariable
+                                                            .ratingImg,
+                                                    itemCount: 5,
+                                                    itemSize: 20,
+                                                    itemPadding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 0),
+                                                    direction: Axis.horizontal,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                  ),
+                                                  InkWell(
+                                                    child: Icon(
+                                                      Icons.favorite,
+                                                      color: (data["likes"]
+                                                              .contains(
+                                                                  user.uid))
+                                                          ? GlobalVariable
+                                                              .secondaryColor
+                                                          : Colors.white,
+                                                    ),
+                                                    onTap: () {
+                                                      apiProviderDB
+                                                          .likeReviewStore({
+                                                        "review_id":
+                                                            data["_id"],
+                                                        "uid": user.uid
+                                                      });
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Text(
+                                                    count_like.toString(),
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              );
+                            });
+                      }),
                 ],
               ),
             ),
