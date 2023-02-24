@@ -7,6 +7,62 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const crypto = require("crypto");
 const Review = require("../models/review");
+const Community = require("../models/community");
+
+authRouter.put("/api/likePostCommunity", async (req, res) => {
+  try {
+    const { post_id, uid } = req.body;
+    const review = await Community.findOne({ _id: post_id });
+    if (!review) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    const existingUser = review.likes.find((like) => like === uid);
+    if (existingUser) {
+      review.likes.pull(uid);
+      const updatedReview = await review.save();
+      return res.status(200).json(updatedReview);
+    }
+    review.likes.push(uid);
+    const updatedReview = await review.save();
+    res.status(200).json(updatedReview);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+authRouter.get("/api/postCommunity", async (req, res) => {
+  try {
+    const data = await Community.find().exec();
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+authRouter.post("/api/postCommunity", async (req, res) => {
+  try {
+    const { uid, email, title, message, image, type, date } = req.body;
+    // const community = await Community.findOne({ title: title });
+    // if (community) {
+    //   return res
+    //     .status(400)
+    //     .json({ msg: "The title of this topic is already taken." });
+    // }
+    let post = new Community({
+      uid,
+      email,
+      title,
+      message,
+      type,
+      image,
+      date,
+    });
+    post = await post.save();
+    res.status(200).json(post);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 authRouter.put("/api/likeReviewStore", async (req, res) => {
   try {

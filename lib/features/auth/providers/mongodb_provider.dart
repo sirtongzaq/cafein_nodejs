@@ -115,4 +115,70 @@ class MongodbProvider with ChangeNotifier {
       print('Error occurred: ${e.toString()}');
     }
   }
+
+  List<dynamic> _dataCommunity = [];
+  List<dynamic> get dataCommunity => _dataCommunity.take(10).toList();
+  Future<void> fetchDataCommunity() async {
+    try {
+      final url = Uri.parse('${GlobalVariable.url}/api/postCommunity');
+      http.Response res = await http.get(
+        url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+        },
+      );
+      if (res.statusCode == 200) {
+        print(res.statusCode);
+        final jsonData = jsonDecode(res.body);
+        _dataCommunity = jsonData;
+      } else {
+        print("Conection fail");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> postCommunity(Map<String, dynamic> body) async {
+    try {
+      final url = Uri.parse('${GlobalVariable.url}/api/postCommunity');
+      http.Response res = await http.post(
+        url,
+        body: json.encode(body),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+        },
+      );
+      if (res.statusCode == 200) {
+        print(res.statusCode);
+        print(res.body);
+      } else {
+        print("Conection fail");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> likePostCummnity(Map<String, dynamic> body) async {
+    try {
+      final url = Uri.parse('${GlobalVariable.url}/api/likePostCommunity');
+      http.Response res = await http.put(
+        url,
+        body: jsonEncode(body),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+      if (res.statusCode == 200) {
+        print('Request successful!');
+        print(res.body);
+      } else {
+        print('Request failed with status: ${res.statusCode}.');
+        print(res.body);
+      }
+    } catch (e) {
+      print('Error occurred: ${e.toString()}');
+    }
+  }
 }

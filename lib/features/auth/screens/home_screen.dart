@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cafein_nodejs/common/widgets/category.dart';
 import 'package:cafein_nodejs/common/widgets/category_header.dart';
 import 'package:cafein_nodejs/constants/global_variables.dart';
@@ -11,6 +10,7 @@ import 'package:cafein_nodejs/features/auth/screens/category/coffee.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/hybridbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/slowbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/speedbar.dart';
+import 'package:cafein_nodejs/features/auth/screens/community/community_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/profile_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/search_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/favorite_screen.dart';
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     duration() async* {
       while (true) {
-        await Future.delayed(Duration(milliseconds: 1000));
+        await Future.delayed(Duration(milliseconds: 500));
         yield "";
       }
     }
@@ -818,7 +818,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) => const HomeScreen()),
+                                  builder: (context) => const CommunityScreen()),
                             );
                           }),
                           imgPath: "assets/community.png",

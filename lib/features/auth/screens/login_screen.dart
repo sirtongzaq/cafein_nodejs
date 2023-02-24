@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService authService = AuthService();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -25,7 +26,10 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void signInUser() {
+  void signInUser() async {
+    setState(() {
+      _isLoading = true;
+    });
     authService.signInUser(
         context: context,
         email: _emailController.text,
@@ -77,12 +81,39 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 50),
-            CustomButton(
-              text: "Login",
-              onTap: () {
-                signInUser();
-              },
-            ),
+            _isLoading
+                ? Container(
+                    // login btn
+                    child: Container(
+                      width: 300,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: GlobalVariable.containerColor,
+                              offset: Offset(0, 1),
+                              blurRadius: 10.0),
+                          BoxShadow(
+                              color: GlobalVariable.containerColor,
+                              offset: Offset(1, 0),
+                              blurRadius: 10.0)
+                        ],
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: GlobalVariable.secondaryColor,
+                      ),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                : CustomButton(
+                    text: "Login",
+                    onTap: () {
+                      signInUser();
+                    },
+                  ),
             SizedBox(
               height: 20,
             ),

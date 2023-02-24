@@ -120,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white,
                 ),
                 title: Text(
-                  user.uid.toUpperCase(),
+                  user.type.toUpperCase(),
                   style: TextStyle(color: Colors.white),
                 ),
               ),

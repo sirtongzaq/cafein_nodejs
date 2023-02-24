@@ -34,7 +34,7 @@ class CustomRadio extends StatelessWidget {
               SizedBox(height: 10),
               Text(
                 _gender.name,
-                style: TextStyle(
+                style: TextStyle(fontSize: 10,
                     color: _gender.isSelected ? Colors.white : Colors.grey),
               )
             ],

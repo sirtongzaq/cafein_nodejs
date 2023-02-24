@@ -34,6 +34,8 @@ class _SignupScreenState extends State<SignupScreen> {
   List<Gender> genders = <Gender>[];
   File? _image;
   Uint8List? _imageBytes;
+  bool _isLoading = false;
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -71,6 +73,9 @@ class _SignupScreenState extends State<SignupScreen> {
     String password = _passwordController.text;
     String cpassword = _confirmpasswordController.text;
     String age = _ageController.text;
+    setState(() {
+      _isLoading = false;
+    }); 
     if (username.isEmpty &&
         email.isEmpty &&
         password.isEmpty &&
@@ -87,6 +92,9 @@ class _SignupScreenState extends State<SignupScreen> {
       );
       return;
     } else {
+      setState(() {
+        _isLoading = true;
+      });
       if (passwordConfrimed()) {
         final cloudinary = CloudinaryPublic("dm9o8zskz", "cbnrtd8l");
         CloudinaryResponse resimg = await cloudinary.uploadFile(
@@ -251,12 +259,38 @@ class _SignupScreenState extends State<SignupScreen> {
                     }),
               ),
               SizedBox(height: 25),
-              CustomButton(
-                text: "SIGNUP",
-                onTap: () {
-                  signupUser();
-                },
-              ),
+              _isLoading
+                  ? Container(
+                      child: Container(
+                        width: 300,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                color: GlobalVariable.containerColor,
+                                offset: Offset(0, 1),
+                                blurRadius: 10.0),
+                            BoxShadow(
+                                color: GlobalVariable.containerColor,
+                                offset: Offset(1, 0),
+                                blurRadius: 10.0)
+                          ],
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: GlobalVariable.secondaryColor,
+                        ),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  : CustomButton(
+                      text: "Signup",
+                      onTap: () {
+                        signupUser();
+                      },
+                    ),
               SizedBox(
                 height: 20,
               ),
