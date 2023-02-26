@@ -11,6 +11,7 @@ import 'package:cafein_nodejs/features/auth/screens/category/hybridbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/slowbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/category/speedbar.dart';
 import 'package:cafein_nodejs/features/auth/screens/community/community_screen.dart';
+import 'package:cafein_nodejs/features/auth/screens/notification_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/profile_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/search_screen.dart';
 import 'package:cafein_nodejs/features/auth/screens/favorite_screen.dart';
@@ -202,7 +203,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (context) => const TestAPI()),
+                              builder: (context) =>
+                                  TestAPI(user_uid: user.uid)),
                         );
                       },
                     ),
@@ -221,7 +223,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (context) => const HomeScreen()),
+                              builder: (context) =>
+                                  NotificationScreen(email: user.email)),
                         );
                       },
                     ),
@@ -252,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           AppBar(
             title: GlobalVariable.imgLogo,
             elevation: 0,
-            toolbarHeight: 120,
+            toolbarHeight: 100,
             centerTitle: true,
             backgroundColor: GlobalVariable.backgroundColor,
           ),
@@ -818,7 +821,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) => const CommunityScreen()),
+                                  builder: (context) =>
+                                      const CommunityScreen()),
                             );
                           }),
                           imgPath: "assets/community.png",
@@ -982,6 +986,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                         "review_id":
                                                             data["_id"],
                                                         "uid": user.uid
+                                                      });
+                                                      apiProviderDB
+                                                          .postNotification({
+                                                        "email": user.email,
+                                                        "title":
+                                                            "${storename} review",
+                                                        "own_email": email,
                                                       });
                                                     },
                                                   ),

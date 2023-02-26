@@ -232,6 +232,11 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                                     "post_id": data["_id"],
                                                     "uid": user.uid
                                                   });
+                                                  apiProvider.postNotification({
+                                                    "email": user.email,
+                                                    "title": "${title} post",
+                                                    "own_email": email,
+                                                  });
                                                 },
                                               ),
                                               SizedBox(

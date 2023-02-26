@@ -8,6 +8,7 @@ import 'package:cafein_nodejs/features/auth/screens/community/communitytype_scre
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
 
@@ -16,7 +17,6 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
-
   @override
   Widget build(BuildContext context) {
     duration() async* {
@@ -232,6 +232,11 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                               apiProvider.likePostCummnity({
                                                 "post_id": data["_id"],
                                                 "uid": user.uid
+                                              });
+                                              apiProvider.postNotification({
+                                                "email": user.email,
+                                                "title": "${title} post",
+                                                "own_email": email,
                                               });
                                             },
                                           ),

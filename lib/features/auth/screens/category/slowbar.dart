@@ -69,6 +69,7 @@ class _SlowbarScreenState extends State<SlowbarScreen> {
         children: [
           Expanded(
             child: ListView.builder(
+                shrinkWrap: true,
                 itemCount: _foundData.length,
                 itemBuilder: (context, index) {
                   var rt = _foundData[index]["rating"];
@@ -87,8 +88,8 @@ class _SlowbarScreenState extends State<SlowbarScreen> {
                           _foundData[index]["string_name"]
                               .toString()
                               .toUpperCase(),
-                          style:
-                              TextStyle(color: Color.fromRGBO(141, 158, 255, 1)),
+                          style: TextStyle(
+                              color: Color.fromRGBO(141, 158, 255, 1)),
                         ),
                         subtitle: Container(
                           child: Column(
@@ -108,7 +109,8 @@ class _SlowbarScreenState extends State<SlowbarScreen> {
                                     GlobalVariable.ratingImg,
                                 itemCount: 5,
                                 itemSize: 20,
-                                itemPadding: EdgeInsets.symmetric(horizontal: 0),
+                                itemPadding:
+                                    EdgeInsets.symmetric(horizontal: 0),
                                 direction: Axis.horizontal,
                               ),
                             ],

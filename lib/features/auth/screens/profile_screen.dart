@@ -15,24 +15,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  File? _image;
-  Uint8List? _imageBytes;
-  void pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        _imageBytes = _image!.readAsBytesSync();
-        print(pickedFile.path);
-      } else {
-        print("no img seleted");
-      }
-    });
-  }
-
-  void saveImage() async {}
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;

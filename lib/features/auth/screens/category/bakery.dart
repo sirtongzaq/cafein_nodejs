@@ -70,6 +70,7 @@ class _BakeryScreenState extends State<BakeryScreen> {
         children: [
           Expanded(
             child: ListView.builder(
+                shrinkWrap: true,
                 itemCount: _foundData.length,
                 itemBuilder: (context, index) {
                   var rt = _foundData[index]["rating"];

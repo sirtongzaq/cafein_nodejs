@@ -831,6 +831,11 @@ class _StoreScreenState extends State<StoreScreen> {
                                             "review_id": data["_id"],
                                             "uid": user.uid
                                           });
+                                          apiProvider.postNotification({
+                                            "email": user.email,
+                                            "title": "${storename} review",
+                                            "own_email": email,
+                                          });
                                         },
                                       ),
                                       SizedBox(

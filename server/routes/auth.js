@@ -8,6 +8,45 @@ const auth = require("../middleware/auth");
 const crypto = require("crypto");
 const Review = require("../models/review");
 const Community = require("../models/community");
+const Notification = require("../models/notification");
+
+authRouter.get("/api/notification", async (req, res) => {
+  try {
+    const data = await Notification.find().exec();
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+authRouter.post("/api/notification", async (req, res) => {
+  try {
+    const { email, title, own_email } = req.body;
+    const check = await Notification.findOne({
+      email: email,
+      title: title,
+      own_email: own_email,
+    });
+    if (check) {
+      await Notification.deleteOne({
+        email: email,
+        title: title,
+        own_email: own_email,
+      });
+      post = await post.save();
+      res.status(200).json({ msg: "delete notification" });
+    }
+    let post = new Notification({
+      email,
+      title,
+      own_email,
+    });
+    post = await post.save();
+    res.status(200).json(post);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 authRouter.put("/api/likePostCommunity", async (req, res) => {
   try {

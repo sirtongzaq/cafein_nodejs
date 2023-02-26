@@ -181,4 +181,25 @@ class MongodbProvider with ChangeNotifier {
       print('Error occurred: ${e.toString()}');
     }
   }
+
+  Future<void> postNotification(Map<String, dynamic> body) async {
+    try {
+      final url = Uri.parse('${GlobalVariable.url}/api/notification');
+      http.Response res = await http.post(
+        url,
+        body: json.encode(body),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+        },
+      );
+      if (res.statusCode == 200) {
+        print(res.statusCode);
+        print(res.body);
+      } else {
+        print("Conection fail");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }
