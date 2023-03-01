@@ -93,20 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            Card(
-              color: GlobalVariable.containerColor,
-              elevation: 0,
-              child: ListTile(
-                leading: Icon(
-                  Icons.coffee,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  user.type.toUpperCase(),
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
+           
           ],
         ),
       ))),
