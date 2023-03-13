@@ -16,7 +16,7 @@ class CustomRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: _gender.isSelected ? Color(0xff8D9EFF) : Colors.white,
+        color: _gender.isSelected ? Colors.black : Colors.white,
         child: Container(
           height: 80,
           width: 80,

@@ -47,9 +47,9 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: GoogleFonts.mitrTextTheme(),
-          scaffoldBackgroundColor: GlobalVariable.backgroundColor,
+          scaffoldBackgroundColor: GlobalVariable.greybackgroundColor,
           colorScheme: ColorScheme.light(
-            primary: GlobalVariable.secondaryColor,
+            primary: Colors.white,
           ),
           appBarTheme: const AppBarTheme(
             elevation: 0,

@@ -23,20 +23,20 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: GlobalVariable.containerColor,
+                color: Colors.black,
                 offset: Offset(0, 1),
                 blurRadius: 10.0),
             BoxShadow(
-                color: GlobalVariable.containerColor,
+                color: Colors.black,
                 offset: Offset(1, 0),
                 blurRadius: 10.0)
           ],
           borderRadius: BorderRadius.circular(10.0),
-          color: GlobalVariable.secondaryColor,
+          color: Colors.black,
         ),
         child: Material(
           borderRadius: BorderRadius.circular(10.0),
-          color: GlobalVariable.secondaryColor,
+          color: Colors.black,
           child: InkWell(
             borderRadius: BorderRadius.circular(10.0),
             onTap: onTap,

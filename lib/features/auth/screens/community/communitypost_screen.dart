@@ -65,15 +65,18 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
     final user = Provider.of<UserProvider>(context).user;
     final apiProvider = Provider.of<MongodbProvider>(context, listen: false);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         toolbarHeight: 100,
         title: Text("COMMUNITY POST"),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 20,
+            ),
             _image == null
                 ? InkWell(
                     onTap: () {
@@ -82,8 +85,8 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(
-                          "https://joadre.com/wp-content/uploads/2019/02/no-image.jpg",
-                          fit: BoxFit.cover,
+                          "https://cdn-icons-png.flaticon.com/512/4886/4886318.png",
+                          fit: BoxFit.contain,
                           width: 342,
                           height: 230),
                     ),
@@ -135,7 +138,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                     filled: true,
-                    fillColor: GlobalVariable.containerColor,
+                    fillColor: Colors.grey,
                   ),
                 ),
               ),
@@ -178,7 +181,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                     filled: true,
-                    fillColor: GlobalVariable.containerColor,
+                    fillColor: Colors.grey,
                   ),
                 ),
               ),
@@ -195,7 +198,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                   itemCount: genders.length,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      splashColor: GlobalVariable.secondaryColor,
+                      splashColor: Colors.black,
                       onTap: () {
                         setState(() {
                           genders
@@ -215,7 +218,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                 height: 50,
                 child: Card(
                   elevation: 0,
-                  color: GlobalVariable.containerColor,
+                  color: Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -255,7 +258,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                             CloudinaryResponse resimg =
                                 await cloudinary.uploadFile(
                                     CloudinaryFile.fromFile(_image!.path,
-                                        folder: "ImgReview"));
+                                        folder: "PostCommunity"));
                             apiProvider.postCommunity({
                               "uid": user.uid,
                               "email": user.email,

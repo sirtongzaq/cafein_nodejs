@@ -49,7 +49,7 @@ class CustomNumberField extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
         filled: true,
-        fillColor: GlobalVariable.containerColor,
+        fillColor: Colors.grey,
         prefixIcon: prefixIcon,
         prefixIconColor: Colors.white,
       ),

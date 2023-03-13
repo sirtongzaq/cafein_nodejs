@@ -72,7 +72,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
       appBar: AppBar(
         toolbarHeight: 100,
         title: Text(widget.type.toUpperCase()),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -82,7 +82,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                 builder: (context) => const CommunityPostScreen()),
           );
         },
-        backgroundColor: GlobalVariable.secondaryColor,
+        backgroundColor: Colors.black,
         child: const Icon(
           Icons.add,
           color: Colors.white,
@@ -118,10 +118,12 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                   int count_like = data["likes"].length;
                                   return Card(
                                     // detail review
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
                                     elevation: 0,
-                                    color: GlobalVariable.containerColor,
+                                    color: Colors.white,
                                     margin: EdgeInsets.all(15),
-
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Column(
@@ -141,8 +143,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 "TITLE",
                                                 style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor),
+                                                    color: Colors.black),
                                               ),
                                               SizedBox(
                                                 width: 5,
@@ -150,7 +151,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 title.toString().toUpperCase(),
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: Colors.grey),
                                               ),
                                             ],
                                           ),
@@ -159,7 +160,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                             child: Text(
                                               message,
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: Colors.grey),
                                             ),
                                           ),
                                           Row(
@@ -167,8 +168,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 "POST",
                                                 style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor),
+                                                    color: Colors.black),
                                               ),
                                               SizedBox(
                                                 width: 5,
@@ -176,7 +176,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 email.toString().toUpperCase(),
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: Colors.grey),
                                               ),
                                             ],
                                           ),
@@ -185,8 +185,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 "TYPE",
                                                 style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor),
+                                                    color: Colors.black),
                                               ),
                                               SizedBox(
                                                 width: 5,
@@ -194,7 +193,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 type.toString().toUpperCase(),
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: Colors.grey),
                                               ),
                                             ],
                                           ),
@@ -203,8 +202,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 "DATE",
                                                 style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor),
+                                                    color: Colors.black),
                                               ),
                                               SizedBox(
                                                 width: 5,
@@ -212,7 +210,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 date,
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: Colors.grey),
                                               ),
                                             ],
                                           ),
@@ -223,9 +221,8 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                                   Icons.favorite,
                                                   color: (data["likes"]
                                                           .contains(user.uid))
-                                                      ? GlobalVariable
-                                                          .secondaryColor
-                                                      : Colors.white,
+                                                      ? Colors.black
+                                                      : Colors.grey,
                                                 ),
                                                 onTap: () {
                                                   apiProvider.likePostCummnity({
@@ -245,7 +242,7 @@ class _CommunityTypeScreenState extends State<CommunityTypeScreen> {
                                               Text(
                                                 count_like.toString(),
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.grey,
                                                 ),
                                               ),
                                             ],

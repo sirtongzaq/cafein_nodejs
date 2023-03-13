@@ -178,7 +178,6 @@ class AuthService {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
-
       if (token == null) {
         prefs.setString('x-auth-token', '');
       }

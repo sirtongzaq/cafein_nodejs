@@ -135,7 +135,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: GlobalVariable.backgroundColor,
+      backgroundColor: GlobalVariable.greybackgroundColor,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -148,7 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
               _image == null
                   ? CircleAvatar(
                       radius: 100,
-                      backgroundColor: GlobalVariable.containerColor,
+                      backgroundColor: Colors.white,
                     )
                   : CircleAvatar(
                       radius: 100,
@@ -156,7 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         _image!,
                         fit: BoxFit.cover,
                       ).image,
-                      backgroundColor: GlobalVariable.containerColor,
+                      backgroundColor: Colors.white,
                     ),
               Padding(
                 padding: const EdgeInsets.only(left: 150),
@@ -245,7 +245,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     itemCount: genders.length,
                     itemBuilder: (context, index) {
                       return InkWell(
-                        splashColor: GlobalVariable.secondaryColor,
+                        splashColor: Colors.black,
                         onTap: () {
                           setState(() {
                             genders
@@ -314,13 +314,16 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: Text(
                         "Loign here".toUpperCase(),
                         style: TextStyle(
-                          color: GlobalVariable.secondaryColor,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 20,
               ),
             ],
           ),

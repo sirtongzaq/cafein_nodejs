@@ -30,7 +30,6 @@ class _MapStoreState extends State<MapStore> {
   LocationData? currentLocation;
   BitmapDescriptor currentLocationIcon = BitmapDescriptor.defaultMarker;
   BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
-
   void setMakerIcon() {
     BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, "assets/pin.png")
         .then(
@@ -90,6 +89,11 @@ class _MapStoreState extends State<MapStore> {
     getPolyPoints();
     super.initState();
   }
+  
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +101,7 @@ class _MapStoreState extends State<MapStore> {
       appBar: AppBar(
         toolbarHeight: 100,
         title: Text("${widget.storename} Map"),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       body: currentLocation == null
           ? const Center(
@@ -117,7 +121,7 @@ class _MapStoreState extends State<MapStore> {
                 Polyline(
                   polylineId: PolylineId("route"),
                   points: polylineCoordinates,
-                  color: Colors.deepPurpleAccent,
+                  color: Colors.black,
                   width: 5,
                 ),
               },

@@ -21,7 +21,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("ACCOUNT"),
-        backgroundColor: GlobalVariable.backgroundColor,
+        toolbarHeight: 100,
+        backgroundColor: Colors.black,
       ),
       body: Center(
           child: SafeArea(
@@ -32,64 +33,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CircleAvatar(
               radius: 100,
               backgroundImage: NetworkImage(user.image),
-              backgroundColor: GlobalVariable.containerColor,
+              backgroundColor: Colors.grey,
             ),
             SizedBox(
               height: 10,
             ),
             Card(
-              color: GlobalVariable.containerColor,
+              color: Colors.white,
               elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.person,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 title: Text(
                   user.username.toUpperCase(),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
             Card(
-              color: GlobalVariable.containerColor,
+              color: Colors.white,
               elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.email,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 title: Text(
                   user.email.toUpperCase(),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
             Card(
-              color: GlobalVariable.containerColor,
+              color: Colors.white,
               elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.numbers,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 title: Text(
                   user.age.toString(),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
             Card(
-              color: GlobalVariable.containerColor,
+              color: Colors.white,
               elevation: 0,
               child: ListTile(
                 leading: Icon(
                   Icons.male,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 title: Text(
                   user.gender.toUpperCase(),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),

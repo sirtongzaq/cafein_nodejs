@@ -23,6 +23,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
+import 'package:cafein_nodejs/features/auth/screens/store/store_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -99,13 +100,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final apiProviderDB = Provider.of<MongodbProvider>(context, listen: false);
     TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
-      backgroundColor: GlobalVariable.backgroundColor,
+      backgroundColor: GlobalVariable.greybackgroundColor,
       drawer: Drawer(
         //drawer
         child: Column(
           children: [
             Material(
-              color: GlobalVariable.backgroundColor,
+              color: GlobalVariable.greybackgroundColor,
               child: InkWell(
                 onTap: () {
                   Navigator.push(
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         CircleAvatar(
                           radius: 52,
                           backgroundImage: NetworkImage(user.image),
-                          backgroundColor: GlobalVariable.containerColor,
+                          backgroundColor: GlobalVariable.greybackgroundColor,
                         ),
                         Text(
                           user.username.toUpperCase(),
@@ -146,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Padding(
               padding: const EdgeInsets.only(top: 0),
               child: Container(
-                color: GlobalVariable.backgroundColor,
+                color: GlobalVariable.greybackgroundColor,
                 height: 563,
                 child: Column(
                   children: [
@@ -241,6 +242,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                       onTap: () {
                         signOutUser(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Logout successful"),
+                            backgroundColor: Colors.red,
+                            behavior: SnackBarBehavior.floating,
+                            margin: EdgeInsets.all(30),
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -257,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             elevation: 0,
             toolbarHeight: 100,
             centerTitle: true,
-            backgroundColor: GlobalVariable.backgroundColor,
+            backgroundColor: GlobalVariable.greybackgroundColor,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -270,11 +279,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       alignment: Alignment.centerLeft,
                       child: TabBar(
                         controller: _tabController,
-                        indicatorColor: GlobalVariable.secondaryColor,
+                        indicatorColor: Colors.black,
                         isScrollable: false,
                         labelPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
-                        labelColor: GlobalVariable.secondaryColor,
+                        labelColor: Colors.black,
                         unselectedLabelColor: Colors.white,
                         tabs: [
                           Tab(
@@ -321,7 +330,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   final review = data_info['count_rating']
                                       .toStringAsFixed(0);
                                   return InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) =>
+                                              StoreScreen(storename: name),
+                                        ),
+                                      );
+                                    },
                                     child: Row(
                                       children: [
                                         Container(
@@ -470,7 +487,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   var cont_rating =
                                       data["count_rating"].toStringAsFixed(0);
                                   return InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) =>
+                                              StoreScreen(storename: name),
+                                        ),
+                                      );
+                                    },
                                     child: Row(
                                       children: [
                                         Container(
@@ -617,7 +642,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   final rating = latlong_info['rating'];
                                   final address = latlong_info['address\t'];
                                   return InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) =>
+                                              StoreScreen(storename: name),
+                                        ),
+                                      );
+                                    },
                                     child: Row(
                                       children: [
                                         Container(
@@ -858,10 +891,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       int count_like = data["likes"].length;
                                       return Card(
                                         // detail review
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
                                         elevation: 0,
-                                        color: GlobalVariable.containerColor,
+                                        color: Colors.white,
                                         margin: EdgeInsets.all(15),
-
                                         child: Padding(
                                           padding: const EdgeInsets.all(10.0),
                                           child: Column(
@@ -881,8 +917,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   Text(
                                                     "STORE",
                                                     style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .secondaryColor),
+                                                        color: Colors.black),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -892,7 +927,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                         .toString()
                                                         .toUpperCase(),
                                                     style: TextStyle(
-                                                        color: Colors.white),
+                                                        color: Colors.grey),
                                                   ),
                                                 ],
                                               ),
@@ -901,8 +936,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   Text(
                                                     "EMAIL",
                                                     style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .secondaryColor),
+                                                        color: Colors.black),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -912,7 +946,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                         .toString()
                                                         .toUpperCase(),
                                                     style: TextStyle(
-                                                        color: Colors.white),
+                                                        color: Colors.grey),
                                                   ),
                                                 ],
                                               ),
@@ -922,7 +956,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 child: Text(
                                                   message,
                                                   style: TextStyle(
-                                                      color: Colors.white),
+                                                      color: Colors.grey),
                                                 ),
                                               ),
                                               Row(
@@ -930,8 +964,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   Text(
                                                     "DATE",
                                                     style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .secondaryColor),
+                                                        color: Colors.black),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -939,7 +972,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   Text(
                                                     date,
                                                     style: TextStyle(
-                                                        color: Colors.white),
+                                                        color: Colors.grey),
                                                   ),
                                                 ],
                                               ),
@@ -948,8 +981,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   Text(
                                                     "RATING",
                                                     style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .secondaryColor),
+                                                        color: Colors.black),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -976,9 +1008,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       color: (data["likes"]
                                                               .contains(
                                                                   user.uid))
-                                                          ? GlobalVariable
-                                                              .secondaryColor
-                                                          : Colors.white,
+                                                          ? Colors.black
+                                                          : Colors.grey,
                                                     ),
                                                     onTap: () {
                                                       apiProviderDB
@@ -1002,7 +1033,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   Text(
                                                     count_like.toString(),
                                                     style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.grey,
                                                     ),
                                                   ),
                                                 ],

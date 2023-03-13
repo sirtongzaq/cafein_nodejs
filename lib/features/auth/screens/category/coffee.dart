@@ -61,7 +61,7 @@ class _CoffeeScreenState extends State<CoffeeScreen> {
       appBar: AppBar(
         toolbarHeight: 100,
         title: Text("COFFEE"),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       body: Column(
         children: [
@@ -74,7 +74,7 @@ class _CoffeeScreenState extends State<CoffeeScreen> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     child: Card(
-                      color: Color.fromRGBO(183, 194, 255, 1),
+                      color: Colors.white,
                       semanticContainer: false,
                       elevation: 0,
                       child: ListTile(
@@ -87,7 +87,7 @@ class _CoffeeScreenState extends State<CoffeeScreen> {
                               .toString()
                               .toUpperCase(),
                           style: TextStyle(
-                              color: Color.fromRGBO(141, 158, 255, 1)),
+                              color: Colors.black),
                         ),
                         subtitle: Container(
                           child: Column(
@@ -95,11 +95,11 @@ class _CoffeeScreenState extends State<CoffeeScreen> {
                             children: [
                               Text(
                                 'Address : ${_foundData[index]["address"]}',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.grey),
                               ),
                               Text(
                                 'Type : ${_foundData[index]["type"]}',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.grey),
                               ),
                               RatingBarIndicator(
                                 rating: double.parse(rt),
@@ -118,7 +118,7 @@ class _CoffeeScreenState extends State<CoffeeScreen> {
                           padding: const EdgeInsets.only(top: 40),
                           child: Icon(
                             Icons.arrow_forward_ios,
-                            color: Colors.white,
+                            color: Colors.grey,
                           ),
                         ),
                         onTap: () {

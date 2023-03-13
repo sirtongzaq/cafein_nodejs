@@ -28,11 +28,11 @@ class CustomCategoryCommunity extends StatelessWidget {
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color: GlobalVariable.containerColor,
+                    color: GlobalVariable.greybackgroundColor,
                     offset: Offset(0, 4),
                     blurRadius: 10.0),
                 BoxShadow(
-                    color: GlobalVariable.containerColor,
+                    color: GlobalVariable.greybackgroundColor,
                     offset: Offset(4, 0),
                     blurRadius: 10.0)
               ],
@@ -50,13 +50,13 @@ class CustomCategoryCommunity extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: Icon(
                     icon,
-                    color: GlobalVariable.secondaryColor,
+                    color: Colors.black,
                     size: 50,
                   )),
               Text(
                 name,
                 style: TextStyle(
-                  color: GlobalVariable.secondaryColor,
+                  color: Colors.black,
                 ),
               ),
             ],

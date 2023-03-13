@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: GlobalVariable.backgroundColor,
+      backgroundColor: GlobalVariable.greybackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -90,16 +90,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: Colors.black,
                               offset: Offset(0, 1),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: Colors.black,
                               offset: Offset(1, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(10.0),
-                        color: GlobalVariable.secondaryColor,
+                        color: Colors.black,
                       ),
                       child: Center(
                         child: CircularProgressIndicator(
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       "Signup here".toUpperCase(),
                       style: TextStyle(
-                        color: GlobalVariable.secondaryColor,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

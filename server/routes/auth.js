@@ -81,12 +81,6 @@ authRouter.get("/api/postCommunity", async (req, res) => {
 authRouter.post("/api/postCommunity", async (req, res) => {
   try {
     const { uid, email, title, message, image, type, date } = req.body;
-    // const community = await Community.findOne({ title: title });
-    // if (community) {
-    //   return res
-    //     .status(400)
-    //     .json({ msg: "The title of this topic is already taken." });
-    // }
     let post = new Community({
       uid,
       email,

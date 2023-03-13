@@ -125,12 +125,13 @@ class _TestAPIState extends State<TestAPI> {
     return Scaffold(
       appBar: AppBar(
         title: Text("FAVORITE"),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
         toolbarHeight: 100,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 14),
             CustomHeader(text: "STORE LIKED"),
             SizedBox(height: 14),
             FutureBuilder(
@@ -179,7 +180,7 @@ class _TestAPIState extends State<TestAPI> {
                                     topRight: Radius.circular(5),
                                     bottomRight: Radius.circular(5),
                                   ),
-                                  color: GlobalVariable.containerColor,
+                                  color: Colors.white,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +192,7 @@ class _TestAPIState extends State<TestAPI> {
                                       child: Text(
                                         name.toString().toUpperCase(),
                                         style: TextStyle(
-                                          color: GlobalVariable.secondaryColor,
+                                          color: Colors.black,
                                         ),
                                       ),
                                     ),
@@ -205,7 +206,7 @@ class _TestAPIState extends State<TestAPI> {
                                       child: Text(
                                         address,
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ),
@@ -221,8 +222,7 @@ class _TestAPIState extends State<TestAPI> {
                                           Text(
                                             "REVIEW ",
                                             style: TextStyle(
-                                              color:
-                                                  GlobalVariable.secondaryColor,
+                                              color: Colors.black,
                                             ),
                                           ),
                                           Container(
@@ -230,7 +230,7 @@ class _TestAPIState extends State<TestAPI> {
                                             child: Text(
                                               "${review}",
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: Colors.grey,
                                               ),
                                             ),
                                           ),
@@ -265,9 +265,8 @@ class _TestAPIState extends State<TestAPI> {
                                               Icons.favorite,
                                               color: (data_info["likes"]
                                                       .contains(user.uid))
-                                                  ? GlobalVariable
-                                                      .secondaryColor
-                                                  : Colors.white,
+                                                  ? Colors.black
+                                                  : Colors.grey,
                                             ),
                                             onTap: () {
                                               apiProvider.likeStore({
@@ -282,7 +281,7 @@ class _TestAPIState extends State<TestAPI> {
                                           Text(
                                             count_like.toString(),
                                             style: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.grey,
                                             ),
                                           ),
                                         ],
@@ -323,9 +322,11 @@ class _TestAPIState extends State<TestAPI> {
                           return Card(
                             // detail review
                             elevation: 0,
-                            color: GlobalVariable.containerColor,
+                            color: Colors.white,
                             margin: EdgeInsets.all(15),
-
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
@@ -342,16 +343,14 @@ class _TestAPIState extends State<TestAPI> {
                                     children: [
                                       Text(
                                         "STORE",
-                                        style: TextStyle(
-                                            color:
-                                                GlobalVariable.secondaryColor),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
                                       ),
                                       Text(
                                         storename.toString().toUpperCase(),
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
                                   ),
@@ -359,16 +358,14 @@ class _TestAPIState extends State<TestAPI> {
                                     children: [
                                       Text(
                                         "EMAIL",
-                                        style: TextStyle(
-                                            color:
-                                                GlobalVariable.secondaryColor),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
                                       ),
                                       Text(
                                         email.toString().toUpperCase(),
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
                                   ),
@@ -377,23 +374,21 @@ class _TestAPIState extends State<TestAPI> {
                                     height: 100,
                                     child: Text(
                                       message,
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                   ),
                                   Row(
                                     children: [
                                       Text(
                                         "DATE",
-                                        style: TextStyle(
-                                            color:
-                                                GlobalVariable.secondaryColor),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
                                       ),
                                       Text(
                                         date,
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
                                   ),
@@ -401,9 +396,7 @@ class _TestAPIState extends State<TestAPI> {
                                     children: [
                                       Text(
                                         "RATING",
-                                        style: TextStyle(
-                                            color:
-                                                GlobalVariable.secondaryColor),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -425,10 +418,10 @@ class _TestAPIState extends State<TestAPI> {
                                       InkWell(
                                         child: Icon(
                                           Icons.favorite,
-                                          color: (data["likes"]
-                                                  .contains(user.uid))
-                                              ? GlobalVariable.secondaryColor
-                                              : Colors.white,
+                                          color:
+                                              (data["likes"].contains(user.uid))
+                                                  ? Colors.black
+                                                  : Colors.grey,
                                         ),
                                         onTap: () {
                                           apiProvider.likeReviewStore({
@@ -445,7 +438,7 @@ class _TestAPIState extends State<TestAPI> {
                                       Text(
                                         count_like.toString(),
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],
@@ -477,10 +470,12 @@ class _TestAPIState extends State<TestAPI> {
                         int count_like = data["likes"].length;
                         return Card(
                           // detail review
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           elevation: 0,
-                          color: GlobalVariable.containerColor,
+                          color: Colors.white,
                           margin: EdgeInsets.all(15),
-
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
@@ -498,14 +493,14 @@ class _TestAPIState extends State<TestAPI> {
                                     Text(
                                       "TITLE",
                                       style: TextStyle(
-                                          color: GlobalVariable.secondaryColor),
+                                          color: Colors.black),
                                     ),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     Text(
                                       title.toString().toUpperCase(),
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                   ],
                                 ),
@@ -513,7 +508,7 @@ class _TestAPIState extends State<TestAPI> {
                                   width: 340,
                                   child: Text(
                                     message,
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.grey),
                                   ),
                                 ),
                                 Row(
@@ -521,14 +516,14 @@ class _TestAPIState extends State<TestAPI> {
                                     Text(
                                       "POST",
                                       style: TextStyle(
-                                          color: GlobalVariable.secondaryColor),
+                                          color: Colors.black),
                                     ),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     Text(
                                       email.toString().toUpperCase(),
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                   ],
                                 ),
@@ -537,14 +532,14 @@ class _TestAPIState extends State<TestAPI> {
                                     Text(
                                       "TYPE",
                                       style: TextStyle(
-                                          color: GlobalVariable.secondaryColor),
+                                          color: Colors.black),
                                     ),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     Text(
                                       type.toString().toUpperCase(),
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                   ],
                                 ),
@@ -553,14 +548,14 @@ class _TestAPIState extends State<TestAPI> {
                                     Text(
                                       "DATE",
                                       style: TextStyle(
-                                          color: GlobalVariable.secondaryColor),
+                                          color: Colors.black),
                                     ),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     Text(
                                       date,
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                   ],
                                 ),
@@ -571,8 +566,8 @@ class _TestAPIState extends State<TestAPI> {
                                         Icons.favorite,
                                         color:
                                             (data["likes"].contains(user.uid))
-                                                ? GlobalVariable.secondaryColor
-                                                : Colors.white,
+                                                ? Colors.black
+                                                : Colors.grey,
                                       ),
                                       onTap: () {
                                         apiProvider.likePostCummnity({
@@ -592,7 +587,7 @@ class _TestAPIState extends State<TestAPI> {
                                     Text(
                                       count_like.toString(),
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Colors.grey,
                                       ),
                                     ),
                                   ],

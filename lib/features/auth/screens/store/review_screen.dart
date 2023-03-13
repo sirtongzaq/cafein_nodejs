@@ -51,15 +51,16 @@ class _ReviewStoreState extends State<ReviewStore> {
     final user = Provider.of<UserProvider>(context).user;
     final apiProvider = Provider.of<MongodbProvider>(context, listen: false);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         toolbarHeight: 100,
         title: Text("${widget.storename} Review"),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+
             _image == null
                 ? InkWell(
                     onTap: () {
@@ -68,8 +69,8 @@ class _ReviewStoreState extends State<ReviewStore> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(
-                          "https://joadre.com/wp-content/uploads/2019/02/no-image.jpg",
-                          fit: BoxFit.cover,
+                          "https://cdn-icons-png.flaticon.com/512/4886/4886318.png",
+                          fit: BoxFit.contain,
                           width: 342,
                           height: 230),
                     ),
@@ -93,7 +94,7 @@ class _ReviewStoreState extends State<ReviewStore> {
                 width: 400,
                 child: Card(
                   elevation: 0,
-                  color: GlobalVariable.containerColor,
+                  color: Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -157,7 +158,7 @@ class _ReviewStoreState extends State<ReviewStore> {
                       fontWeight: FontWeight.bold,
                     ),
                     filled: true,
-                    fillColor: GlobalVariable.containerColor,
+                    fillColor: Colors.grey,
                   ),
                 ),
               ),
@@ -171,7 +172,7 @@ class _ReviewStoreState extends State<ReviewStore> {
                 height: 50,
                 child: Card(
                   elevation: 0,
-                  color: GlobalVariable.containerColor,
+                  color: Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),

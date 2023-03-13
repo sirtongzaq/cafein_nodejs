@@ -53,7 +53,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       appBar: AppBar(
         title: Text("NOTIFICATION"),
         toolbarHeight: 100,
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       body: SafeArea(
         child: Column(
@@ -70,7 +70,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         var data = _foundData[index];
                         return Card(
                           elevation: 0,
-                          color: GlobalVariable.containerColor,
+                          color: Colors.white,
                           margin: EdgeInsets.all(15),
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
@@ -82,18 +82,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   children: [
                                     Text(
                                       data["email"].toString().toUpperCase(),
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                     Text(
                                       " Like ".toString().toUpperCase(),
                                       style: TextStyle(
-                                          color: GlobalVariable.secondaryColor),
+                                          color: Colors.black),
                                     ),
                                     Container(
                                       width: 150,
                                       child: Text(
                                         data["title"].toString().toUpperCase(),
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ),
                                   ],

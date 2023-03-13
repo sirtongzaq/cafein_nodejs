@@ -107,7 +107,7 @@ class _StoreScreenState extends State<StoreScreen> {
             ),
           );
         },
-        backgroundColor: GlobalVariable.secondaryColor,
+        backgroundColor: Colors.black,
         child: const Icon(
           Icons.add,
           color: Colors.white,
@@ -116,7 +116,7 @@ class _StoreScreenState extends State<StoreScreen> {
       appBar: AppBar(
         toolbarHeight: 100,
         title: Text(widget.storename),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -142,7 +142,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                 width: double.infinity,
                                 height: 400,
                                 initialPage: 0,
-                                indicatorColor: GlobalVariable.secondaryColor,
+                                indicatorColor: Colors.black,
                                 indicatorBackgroundColor: Colors.grey,
                                 // ignore: sort_child_properties_last
                                 children: [
@@ -167,7 +167,7 @@ class _StoreScreenState extends State<StoreScreen> {
                               Card(
                                 // detail body
                                 elevation: 0,
-                                color: GlobalVariable.containerColor,
+                                color: Colors.white,
                                 margin: EdgeInsets.all(15),
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
@@ -181,14 +181,13 @@ class _StoreScreenState extends State<StoreScreen> {
                                         children: [
                                           Text(
                                             "DETAIL",
-                                            style: TextStyle(
-                                                color: GlobalVariable
-                                                    .secondaryColor),
+                                            style:
+                                                TextStyle(color: Colors.black),
                                           ),
                                           Text(
                                             data["address"],
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: Colors.grey),
                                           ),
                                         ],
                                       ),
@@ -201,13 +200,12 @@ class _StoreScreenState extends State<StoreScreen> {
                                               Text(
                                                 "PRICE",
                                                 style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor),
+                                                    color: Colors.black),
                                               ),
                                               Text(
                                                 "${data["price"]}",
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: Colors.grey),
                                               ),
                                             ],
                                           ),
@@ -221,13 +219,12 @@ class _StoreScreenState extends State<StoreScreen> {
                                                 Text(
                                                   "OPEN DAILY",
                                                   style: TextStyle(
-                                                      color: GlobalVariable
-                                                          .secondaryColor),
+                                                      color: Colors.black),
                                                 ),
                                                 Text(
                                                   data["open_daily"],
                                                   style: TextStyle(
-                                                      color: Colors.white),
+                                                      color: Colors.grey),
                                                 ),
                                               ],
                                             ),
@@ -243,13 +240,12 @@ class _StoreScreenState extends State<StoreScreen> {
                                               Text(
                                                 "CONTACT",
                                                 style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor),
+                                                    color: Colors.black),
                                               ),
                                               Text(
                                                 data["contact"],
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: Colors.grey),
                                               ),
                                             ],
                                           ),
@@ -263,15 +259,14 @@ class _StoreScreenState extends State<StoreScreen> {
                                                 Text(
                                                   "TYPE",
                                                   style: TextStyle(
-                                                      color: GlobalVariable
-                                                          .secondaryColor),
+                                                      color: Colors.black),
                                                 ),
                                                 Text(
                                                   data["type"]
                                                       .toString()
                                                       .toUpperCase(),
                                                   style: TextStyle(
-                                                      color: Colors.white),
+                                                      color: Colors.grey),
                                                 ),
                                               ],
                                             ),
@@ -289,7 +284,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                               },
                                               child: Icon(
                                                 Icons.call,
-                                                color: Colors.white,
+                                                color: Colors.grey,
                                               ),
                                             ),
                                             InkWell(
@@ -299,7 +294,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                               },
                                               child: Icon(
                                                 Icons.facebook,
-                                                color: Colors.white,
+                                                color: Colors.grey,
                                               ),
                                             ),
                                             InkWell(
@@ -320,7 +315,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                               },
                                               child: Icon(
                                                 Icons.near_me,
-                                                color: Colors.white,
+                                                color: Colors.grey,
                                               ),
                                             ),
                                           ],
@@ -330,9 +325,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                         padding: const EdgeInsets.only(top: 5),
                                         child: Text(
                                           "RATTING",
-                                          style: TextStyle(
-                                              color: GlobalVariable
-                                                  .secondaryColor),
+                                          style: TextStyle(color: Colors.black),
                                         ),
                                       ),
                                       Row(
@@ -357,9 +350,8 @@ class _StoreScreenState extends State<StoreScreen> {
                                                   Icons.favorite,
                                                   color: (data["likes"]
                                                           .contains(user.uid))
-                                                      ? GlobalVariable
-                                                          .secondaryColor
-                                                      : Colors.white,
+                                                      ? Colors.black
+                                                      : Colors.grey,
                                                 ),
                                                 onTap: () {
                                                   apiProvider.likeStore({
@@ -372,7 +364,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                               Text(
                                                 count_like.toString(),
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.grey,
                                                 ),
                                               ),
                                             ],
@@ -410,16 +402,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -440,11 +432,11 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
@@ -470,16 +462,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -500,16 +492,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -530,16 +522,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -560,16 +552,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -590,16 +582,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -620,16 +612,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -650,16 +642,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: GlobalVariable.containerColor,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -680,16 +672,16 @@ class _StoreScreenState extends State<StoreScreen> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(0, 4),
                               blurRadius: 10.0),
                           BoxShadow(
-                              color: GlobalVariable.containerColor,
+                              color: GlobalVariable.greybackgroundColor,
                               offset: Offset(4, 0),
                               blurRadius: 10.0)
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: Colors.black,
+                        color: GlobalVariable.greybackgroundColor,
                         image: DecorationImage(
                           image: AssetImage(
                             "assets/menu_1.jpg",
@@ -736,10 +728,12 @@ class _StoreScreenState extends State<StoreScreen> {
                           int count_like = data["likes"].length;
                           return Card(
                             // detail review
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             elevation: 0,
-                            color: GlobalVariable.containerColor,
+                            color: Colors.white,
                             margin: EdgeInsets.all(15),
-
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
@@ -758,14 +752,14 @@ class _StoreScreenState extends State<StoreScreen> {
                                         "EMAIL",
                                         style: TextStyle(
                                             color:
-                                                GlobalVariable.secondaryColor),
+                                                Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
                                       ),
                                       Text(
                                         email.toString().toUpperCase(),
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
                                   ),
@@ -774,7 +768,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                     height: 100,
                                     child: Text(
                                       message,
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                   ),
                                   Row(
@@ -783,14 +777,14 @@ class _StoreScreenState extends State<StoreScreen> {
                                         "DATE",
                                         style: TextStyle(
                                             color:
-                                                GlobalVariable.secondaryColor),
+                                                Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
                                       ),
                                       Text(
                                         date,
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
                                   ),
@@ -800,7 +794,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                         "RATING",
                                         style: TextStyle(
                                             color:
-                                                GlobalVariable.secondaryColor),
+                                                Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -823,8 +817,8 @@ class _StoreScreenState extends State<StoreScreen> {
                                           Icons.favorite,
                                           color: (data["likes"]
                                                   .contains(user.uid))
-                                              ? GlobalVariable.secondaryColor
-                                              : Colors.white,
+                                              ? Colors.black
+                                              : Colors.grey,
                                         ),
                                         onTap: () {
                                           apiProvider.likeReviewStore({
@@ -844,7 +838,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                       Text(
                                         count_like.toString(),
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.grey,
                                         ),
                                       ),
                                     ],

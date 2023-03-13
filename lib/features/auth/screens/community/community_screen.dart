@@ -32,7 +32,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
       appBar: AppBar(
         toolbarHeight: 100,
         title: Text("COMMUNITY"),
-        backgroundColor: GlobalVariable.backgroundColor,
+        backgroundColor: Colors.black,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -42,7 +42,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 builder: (context) => const CommunityPostScreen()),
           );
         },
-        backgroundColor: GlobalVariable.secondaryColor,
+        backgroundColor: Colors.black,
         child: const Icon(
           Icons.add,
           color: Colors.white,
@@ -51,6 +51,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 10),
             CustomHeader(text: "CATEGORY"),
             SizedBox(height: 10),
             Padding(
@@ -121,10 +122,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
                               int count_like = data["likes"].length;
                               return Card(
                                 // detail review
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                                 elevation: 0,
-                                color: GlobalVariable.containerColor,
+                                color: Colors.white,
                                 margin: EdgeInsets.all(15),
-
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Column(
@@ -142,9 +145,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                         children: [
                                           Text(
                                             "TITLE",
-                                            style: TextStyle(
-                                                color: GlobalVariable
-                                                    .secondaryColor),
+                                            style:
+                                                TextStyle(color: Colors.black),
                                           ),
                                           SizedBox(
                                             width: 5,
@@ -152,7 +154,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                           Text(
                                             title.toString().toUpperCase(),
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: Colors.grey),
                                           ),
                                         ],
                                       ),
@@ -160,16 +162,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                         width: 340,
                                         child: Text(
                                           message,
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(color: Colors.grey),
                                         ),
                                       ),
                                       Row(
                                         children: [
                                           Text(
                                             "POST",
-                                            style: TextStyle(
-                                                color: GlobalVariable
-                                                    .secondaryColor),
+                                            style:
+                                                TextStyle(color: Colors.black),
                                           ),
                                           SizedBox(
                                             width: 5,
@@ -177,7 +178,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                           Text(
                                             email.toString().toUpperCase(),
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: Colors.grey),
                                           ),
                                         ],
                                       ),
@@ -185,9 +186,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                         children: [
                                           Text(
                                             "TYPE",
-                                            style: TextStyle(
-                                                color: GlobalVariable
-                                                    .secondaryColor),
+                                            style:
+                                                TextStyle(color: Colors.black),
                                           ),
                                           SizedBox(
                                             width: 5,
@@ -195,7 +195,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                           Text(
                                             type.toString().toUpperCase(),
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: Colors.grey),
                                           ),
                                         ],
                                       ),
@@ -203,9 +203,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                         children: [
                                           Text(
                                             "DATE",
-                                            style: TextStyle(
-                                                color: GlobalVariable
-                                                    .secondaryColor),
+                                            style:
+                                                TextStyle(color: Colors.black),
                                           ),
                                           SizedBox(
                                             width: 5,
@@ -213,7 +212,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                           Text(
                                             date,
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: Colors.grey),
                                           ),
                                         ],
                                       ),
@@ -224,9 +223,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                               Icons.favorite,
                                               color: (data["likes"]
                                                       .contains(user.uid))
-                                                  ? GlobalVariable
-                                                      .secondaryColor
-                                                  : Colors.white,
+                                                  ? Colors.black
+                                                  : Colors.grey,
                                             ),
                                             onTap: () {
                                               apiProvider.likePostCummnity({
@@ -246,7 +244,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                           Text(
                                             count_like.toString(),
                                             style: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.grey,
                                             ),
                                           ),
                                         ],
