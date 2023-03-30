@@ -10,6 +10,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/api_provider.dart';
+
 class ReviewStore extends StatefulWidget {
   final String storename;
   ReviewStore({required this.storename});
@@ -60,7 +62,6 @@ class _ReviewStoreState extends State<ReviewStore> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             _image == null
                 ? InkWell(
                     onTap: () {
@@ -237,6 +238,13 @@ class _ReviewStoreState extends State<ReviewStore> {
                               "message": message.text.trim(),
                               "rating": ratings,
                               "image": resimg.secureUrl,
+                              "date": datetimenow,
+                            });
+                            ApiProvider().postuserReview({
+                              "uid": user.uid,
+                              "rating": ratings,
+                              "store": widget.storename,
+                              "message": message.text.trim(),
                               "date": datetimenow,
                             });
                             message.clear();

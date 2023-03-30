@@ -29,7 +29,7 @@ class MongodbProvider with ChangeNotifier {
   }
 
   List<dynamic> _dataReivewStore = [];
-  List<dynamic> get dataReivewStore => _dataReivewStore;
+  List<dynamic> get dataReivewStore => _dataReivewStore.reversed.take(10).toList();
   Future<void> fetchDataReviewStore() async {
     try {
       final url = Uri.parse('${GlobalVariable.url}/api/reviewStore');
@@ -117,7 +117,7 @@ class MongodbProvider with ChangeNotifier {
   }
 
   List<dynamic> _dataCommunity = [];
-  List<dynamic> get dataCommunity => _dataCommunity.take(10).toList();
+  List<dynamic> get dataCommunity => _dataCommunity.reversed.take(10).toList();
   Future<void> fetchDataCommunity() async {
     try {
       final url = Uri.parse('${GlobalVariable.url}/api/postCommunity');

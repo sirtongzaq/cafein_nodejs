@@ -266,7 +266,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                                       .toString()
                                                       .toUpperCase(),
                                                   style: TextStyle(
-                                                      color: Colors.grey),
+                                                      color: Colors.grey,fontSize: 12),
                                                 ),
                                               ],
                                             ),

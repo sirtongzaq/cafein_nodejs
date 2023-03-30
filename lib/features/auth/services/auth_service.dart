@@ -22,6 +22,7 @@ class AuthService {
       required String password,
       required String age,
       required String gender,
+      required String uid,
       required String img}) async {
     try {
       User user = User(
@@ -32,7 +33,7 @@ class AuthService {
         gender: gender,
         type: "",
         token: "",
-        uid: "",
+        uid: uid,
         image: img,
       );
       final url = Uri.parse('${GlobalVariable.url}/api/signup');

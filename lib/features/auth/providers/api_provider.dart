@@ -1,10 +1,8 @@
+import 'package:cafein_nodejs/constants/global_variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-String X = "3ee8-2001-fb1-148-7898-84d7-14ac-a931-997a.ap.ngrok.io";
-String apiKey = "";
 
 class ApiProvider with ChangeNotifier {
   late String _dataEvent;
@@ -29,12 +27,12 @@ class ApiProvider with ChangeNotifier {
   }
 
   Future<void> postuserEvent(Map<String, dynamic> body) async {
-    var url = Uri.https(X, '/take2');
+    var url = Uri.https(GlobalVariable.urlRec, '/take2');
     try {
       final response = await http.post(
         url,
         body: json.encode(body),
-        headers: {'Content-Type': 'application/json', "apikey": apiKey},
+        headers: {'Content-Type': 'application/json'},
       );
       if (response.statusCode == 201) {
         print(response.body);
@@ -48,7 +46,7 @@ class ApiProvider with ChangeNotifier {
   }
 
   Future<void> postuserReview(Map<String, dynamic> body) async {
-    var url = Uri.https(X, '/review');
+    var url = Uri.https(GlobalVariable.urlRec, '/review');
     try {
       final response = await http.post(
         url,
@@ -67,7 +65,7 @@ class ApiProvider with ChangeNotifier {
   }
 
   Future<void> postuserData(Map<String, dynamic> body) async {
-    var url = Uri.https(X, '/take');
+    var url = Uri.https(GlobalVariable.urlRec, '/take');
     try {
       final response = await http.post(
         url,
@@ -87,14 +85,19 @@ class ApiProvider with ChangeNotifier {
 
   List<dynamic> _dataRec = [];
   List<dynamic> get dataRec => _dataRec;
-  Future<void> fetchDataRec(Map<String, dynamic> queryParams) async {
+  Future<void> fetchDataRec(Map<String, dynamic> body) async {
     try {
-      var url = Uri.https(X, '/recommend', queryParams);
-      final response = await http.get(url);
+      var url = Uri.https(GlobalVariable.urlRec, '/recommend_test');
+      final response = await http.post(
+        url,
+        body: json.encode(body),
+        headers: {'Content-Type': 'application/json'},
+      );
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         print(jsonData["data"]);
         _dataRec = jsonData["data"];
+        print(_dataRec.length);
         notifyListeners();
       } else {
         print(response.statusCode);
@@ -108,7 +111,7 @@ class ApiProvider with ChangeNotifier {
   List<dynamic> get dataPop => _dataPop;
   Future<void> fetchDataPop() async {
     try {
-      var url = Uri.https(X, '/recommend_populations');
+      var url = Uri.https(GlobalVariable.urlRec, '/recommend_populations');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
@@ -134,7 +137,7 @@ class ApiProvider with ChangeNotifier {
       'longitude': '${long_user}'
     };
     try {
-      var url = Uri.https(X, '/recomnear', latlong_user);
+      var url = Uri.https(GlobalVariable.urlRec, '/recomnear', latlong_user);
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);

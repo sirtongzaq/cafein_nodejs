@@ -222,7 +222,7 @@ authRouter.post("/api/postStore", async (req, res) => {
 // SIGNUP
 authRouter.post("/api/signup", async (req, res) => {
   try {
-    const { username, email, password, age, gender, image } = req.body;
+    const { username, email, password, age, gender, uid, image } = req.body;
     const existringUser = await User.findOne({ email });
     if (existringUser) {
       return res
@@ -230,14 +230,13 @@ authRouter.post("/api/signup", async (req, res) => {
         .json({ msg: "User with same email already exists!" });
     }
     const hashedPassword = await bcryptjs.hash(password, 8);
-    const uID = await crypto.randomUUID();
     let user = new User({
       username,
       email,
       password: hashedPassword,
       age,
       gender,
-      uid: uID,
+      uid,
       image,
     });
     user = await user.save();

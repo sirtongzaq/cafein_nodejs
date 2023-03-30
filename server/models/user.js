@@ -35,6 +35,7 @@ const userSchema = mongoose.Schema({
     default: "user",
   },
   uid: {
+    require: true,
     type: String,
   },
   image: {

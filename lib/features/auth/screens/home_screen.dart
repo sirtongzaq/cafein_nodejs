@@ -381,8 +381,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 child: Text(
                                                   name.toString().toUpperCase(),
                                                   style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                               ),
@@ -399,8 +398,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   child: Text(
                                                     address,
                                                     style: TextStyle(
-                                                      color: GlobalVariable
-                                                          .greybackgroundColor,
+                                                      color: Colors.grey,
                                                     ),
                                                   ),
                                                 ),
@@ -418,8 +416,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                     Text(
                                                       "REVIEW ",
                                                       style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .secondaryColor,
+                                                        color: Colors.black,
                                                       ),
                                                     ),
                                                     Container(
@@ -427,8 +424,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       child: Text(
                                                         "${review}",
                                                         style: TextStyle(
-                                                          color: GlobalVariable
-                                                              .greybackgroundColor,
+                                                          color: Colors.grey,
                                                         ),
                                                       ),
                                                     ),
@@ -538,8 +534,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 child: Text(
                                                   name.toString().toUpperCase(),
                                                   style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                               ),
@@ -556,8 +551,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   child: Text(
                                                     address,
                                                     style: TextStyle(
-                                                      color: GlobalVariable
-                                                          .greybackgroundColor,
+                                                      color: Colors.grey,
                                                     ),
                                                   ),
                                                 ),
@@ -575,15 +569,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                     Text(
                                                       "REVIEW ",
                                                       style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .secondaryColor,
+                                                        color: Colors.black,
                                                       ),
                                                     ),
                                                     Text(
                                                       cont_rating,
                                                       style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .greybackgroundColor,
+                                                        color: Colors.grey,
                                                       ),
                                                     ),
                                                   ],
@@ -693,8 +685,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                 child: Text(
                                                   name.toString().toUpperCase(),
                                                   style: TextStyle(
-                                                    color: GlobalVariable
-                                                        .secondaryColor,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                               ),
@@ -711,8 +702,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   child: Text(
                                                     address,
                                                     style: TextStyle(
-                                                      color: GlobalVariable
-                                                          .greybackgroundColor,
+                                                      color: Colors.grey,
                                                     ),
                                                   ),
                                                 ),
@@ -730,15 +720,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                     Text(
                                                       "DISTANCE ",
                                                       style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .secondaryColor,
+                                                        color: Colors.black,
                                                       ),
                                                     ),
                                                     Text(
                                                       "${distance} Km",
                                                       style: TextStyle(
-                                                        color: GlobalVariable
-                                                            .greybackgroundColor,
+                                                        color: Colors.grey,
                                                       ),
                                                     ),
                                                   ],
@@ -1044,6 +1032,174 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       );
                                     }),
                               );
+                            });
+                      }),
+                  SizedBox(height: 10),
+                  CustomHeader(text: "LATEST POST"),
+                  SizedBox(height: 10),
+                  StreamBuilder<Object>(
+                      stream: duration(),
+                      builder: (context, snapshot) {
+                        return FutureBuilder(
+                            future: apiProviderDB.fetchDataCommunity(),
+                            builder: (context, snapshot) {
+                              return ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: apiProviderDB.dataCommunity.length,
+                                  itemBuilder: (context, index) {
+                                    var data =
+                                        apiProviderDB.dataCommunity[index];
+                                    var title = data["title"];
+                                    var email = data["email"];
+                                    var message = data["message"];
+                                    var image = data["image"];
+                                    var type = data["type"];
+                                    var date = data["date"];
+                                    int count_like = data["likes"].length;
+                                    return Card(
+                                      // detail review
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      elevation: 0,
+                                      color: Colors.white,
+                                      margin: EdgeInsets.all(15),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Image.network(image,
+                                                  fit: BoxFit.cover,
+                                                  width: 342,
+                                                  height: 230),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "TITLE",
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  title
+                                                      .toString()
+                                                      .toUpperCase(),
+                                                  style: TextStyle(
+                                                      color: Colors.grey),
+                                                ),
+                                              ],
+                                            ),
+                                            Container(
+                                              width: 340,
+                                              child: Text(
+                                                message,
+                                                style: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "POST",
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  email
+                                                      .toString()
+                                                      .toUpperCase(),
+                                                  style: TextStyle(
+                                                      color: Colors.grey),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "TYPE",
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  type.toString().toUpperCase(),
+                                                  style: TextStyle(
+                                                      color: Colors.grey),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "DATE",
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  date,
+                                                  style: TextStyle(
+                                                      color: Colors.grey),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                InkWell(
+                                                  child: Icon(
+                                                    Icons.favorite,
+                                                    color: (data["likes"]
+                                                            .contains(user.uid))
+                                                        ? Colors.black
+                                                        : Colors.grey,
+                                                  ),
+                                                  onTap: () {
+                                                    apiProviderDB
+                                                        .likePostCummnity({
+                                                      "post_id": data["_id"],
+                                                      "uid": user.uid
+                                                    });
+                                                    apiProviderDB
+                                                        .postNotification({
+                                                      "email": user.email,
+                                                      "title": "${title} post",
+                                                      "own_email": email,
+                                                    });
+                                                  },
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  count_like.toString(),
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  });
                             });
                       }),
                 ],

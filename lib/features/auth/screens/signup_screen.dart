@@ -10,11 +10,15 @@ import 'package:cafein_nodejs/common/widgets/custom_numberfield.dart';
 import 'package:cafein_nodejs/common/widgets/custom_textfield.dart';
 import 'package:cafein_nodejs/common/widgets/gender.dart';
 import 'package:cafein_nodejs/constants/global_variables.dart';
+import 'package:cafein_nodejs/features/auth/providers/api_provider.dart';
+import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
 import 'package:cafein_nodejs/features/auth/services/auth_service.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -35,7 +39,6 @@ class _SignupScreenState extends State<SignupScreen> {
   File? _image;
   Uint8List? _imageBytes;
   bool _isLoading = false;
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -75,7 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
     String age = _ageController.text;
     setState(() {
       _isLoading = false;
-    }); 
+    });
     if (username.isEmpty &&
         email.isEmpty &&
         password.isEmpty &&
@@ -100,6 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
         CloudinaryResponse resimg = await cloudinary.uploadFile(
             CloudinaryFile.fromFile(_image!.path, folder: "ImgProfile"));
         print(resimg.secureUrl);
+        var uuid = Uuid();
         authService.signUpUser(
           context: context,
           username: _usernameController.text,
@@ -107,8 +111,15 @@ class _SignupScreenState extends State<SignupScreen> {
           password: _passwordController.text,
           age: _ageController.text,
           gender: defualtGender,
+          uid: uuid.v5(Uuid.NAMESPACE_URL, _usernameController.text),
           img: resimg.secureUrl,
         );
+        ApiProvider().postuserData({
+          "name": _usernameController.text,
+          "gender": defualtGender,
+          "age": int.parse(_ageController.text),
+          "uid": uuid.v5(Uuid.NAMESPACE_URL, _usernameController.text),
+        });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -133,8 +144,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
+    final apiProvider = Provider.of<ApiProvider>(context, listen: false);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: GlobalVariable.greybackgroundColor,
       body: SingleChildScrollView(
         child: SafeArea(
@@ -148,7 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
               _image == null
                   ? CircleAvatar(
                       radius: 100,
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.grey,
                     )
                   : CircleAvatar(
                       radius: 100,
@@ -260,27 +273,34 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               SizedBox(height: 25),
               _isLoading
-                  ? Container(
+                  ? InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      },
                       child: Container(
-                        width: 300,
-                        height: 55,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: GlobalVariable.containerColor,
-                                offset: Offset(0, 1),
-                                blurRadius: 10.0),
-                            BoxShadow(
-                                color: GlobalVariable.containerColor,
-                                offset: Offset(1, 0),
-                                blurRadius: 10.0)
-                          ],
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: GlobalVariable.secondaryColor,
-                        ),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
+                        child: Container(
+                          width: 300,
+                          height: 55,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 10.0),
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(1, 0),
+                                  blurRadius: 10.0)
+                            ],
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.black,
+                          ),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
