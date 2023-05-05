@@ -32,7 +32,10 @@ class ApiProvider with ChangeNotifier {
       final response = await http.post(
         url,
         body: json.encode(body),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'Lp0sJNLUiREPno2Rtv2GMFNukpdtDxsC'
+        },
       );
       if (response.statusCode == 201) {
         print(response.body);
@@ -51,7 +54,10 @@ class ApiProvider with ChangeNotifier {
       final response = await http.post(
         url,
         body: json.encode(body),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'Lp0sJNLUiREPno2Rtv2GMFNukpdtDxsC'
+        },
       );
       if (response.statusCode == 201) {
         print(response.body);
@@ -70,7 +76,10 @@ class ApiProvider with ChangeNotifier {
       final response = await http.post(
         url,
         body: json.encode(body),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'Lp0sJNLUiREPno2Rtv2GMFNukpdtDxsC'
+        },
       );
       if (response.statusCode == 201) {
         print(response.body);
@@ -91,7 +100,10 @@ class ApiProvider with ChangeNotifier {
       final response = await http.post(
         url,
         body: json.encode(body),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'Lp0sJNLUiREPno2Rtv2GMFNukpdtDxsC'
+        },
       );
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
@@ -112,7 +124,13 @@ class ApiProvider with ChangeNotifier {
   Future<void> fetchDataPop() async {
     try {
       var url = Uri.https(GlobalVariable.urlRec, '/recommend_populations');
-      final response = await http.get(url);
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'Lp0sJNLUiREPno2Rtv2GMFNukpdtDxsC'
+        },
+      );
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         _dataPop = jsonData["data"];
@@ -138,7 +156,13 @@ class ApiProvider with ChangeNotifier {
     };
     try {
       var url = Uri.https(GlobalVariable.urlRec, '/recomnear', latlong_user);
-      final response = await http.get(url);
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'Lp0sJNLUiREPno2Rtv2GMFNukpdtDxsC'
+        },
+      );
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         _dataNear = jsonData;

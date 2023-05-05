@@ -338,6 +338,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               StoreScreen(storename: name),
                                         ),
                                       );
+                                      apiProvider.postuserEvent({
+                                        "uid": user.uid,
+                                        "event": "view",
+                                        "Content": name,
+                                      });
                                     },
                                     child: Row(
                                       children: [
@@ -491,6 +496,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               StoreScreen(storename: name),
                                         ),
                                       );
+                                      apiProvider.postuserEvent({
+                                        "uid": user.uid,
+                                        "event": "view",
+                                        "Content": name,
+                                      });
                                     },
                                     child: Row(
                                       children: [
@@ -642,6 +652,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               StoreScreen(storename: name),
                                         ),
                                       );
+                                      apiProvider.postuserEvent({
+                                        "uid": user.uid,
+                                        "event": "view",
+                                        "Content": name,
+                                      });
                                     },
                                     child: Row(
                                       children: [

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cafein_nodejs/constants/global_variables.dart';
+import 'package:cafein_nodejs/features/auth/providers/api_provider.dart';
 import 'package:cafein_nodejs/features/auth/providers/mongodb_provider.dart';
 import 'package:cafein_nodejs/features/auth/providers/user_provider.dart';
 import 'package:cafein_nodejs/features/auth/screens/store/map_screen.dart';
@@ -97,6 +98,7 @@ class _StoreScreenState extends State<StoreScreen> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
     final apiProvider = Provider.of<MongodbProvider>(context, listen: false);
+    final apiProvider2 = Provider.of<ApiProvider>(context, listen: false);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -266,7 +268,8 @@ class _StoreScreenState extends State<StoreScreen> {
                                                       .toString()
                                                       .toUpperCase(),
                                                   style: TextStyle(
-                                                      color: Colors.grey,fontSize: 12),
+                                                      color: Colors.grey,
+                                                      fontSize: 12),
                                                 ),
                                               ],
                                             ),
@@ -358,6 +361,11 @@ class _StoreScreenState extends State<StoreScreen> {
                                                     "string_name":
                                                         widget.storename,
                                                     "uid": user.uid
+                                                  });
+                                                  apiProvider2.postuserEvent({
+                                                    "uid": user.uid,
+                                                    "event": "like",
+                                                    "Content": widget.storename,
                                                   });
                                                 },
                                               ),
@@ -750,9 +758,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                     children: [
                                       Text(
                                         "EMAIL",
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -775,9 +781,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                     children: [
                                       Text(
                                         "DATE",
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -792,9 +796,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                     children: [
                                       Text(
                                         "RATING",
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -815,10 +817,10 @@ class _StoreScreenState extends State<StoreScreen> {
                                       InkWell(
                                         child: Icon(
                                           Icons.favorite,
-                                          color: (data["likes"]
-                                                  .contains(user.uid))
-                                              ? Colors.black
-                                              : Colors.grey,
+                                          color:
+                                              (data["likes"].contains(user.uid))
+                                                  ? Colors.black
+                                                  : Colors.grey,
                                         ),
                                         onTap: () {
                                           apiProvider.likeReviewStore({

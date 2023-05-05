@@ -9,5 +9,5 @@ class GlobalVariable {
   static const ratingImg = Image(image: AssetImage('assets/rating.png'), fit: BoxFit.cover);
   static const String url = 'http://192.168.1.54:3000';
   static const String googleAPiKey = "AIzaSyDDmD362j1kUlrRXcAJ8OoHBYCKVpzt1D8";
-  static const String urlRec = "825a-2001-fb1-14a-64b0-4d2-217e-8c50-6903.ap.ngrok.io";
+  static const String urlRec = "91eb-27-55-71-183.ngrok-free.app";
 }
