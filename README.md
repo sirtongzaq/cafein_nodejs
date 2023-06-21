@@ -1,16 +1,17 @@
-# cafein_nodejs
+# About Project
 
-A new Flutter project.
+* CAFEIN APP | MOBLIE APP FOR COFFEE RECOMMENDER
+* NARONGRIT UPPALABAT 63114540369
+* ADVISER DR. KRIENGSAK TREEPRAPIN
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+* open vs code and open teminal
+* cd your own folder
+* git clone http://projectcs.sci.ubu.ac.th/senior-prj-65/63114540369.git
+* cd server
+* npm run dev
+* open android simulator
+* flutter run or ctrl+f5
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Alt text](https://www.techtalkthai.com/wp-content/uploads/2022/02/flutter-banner.png)
